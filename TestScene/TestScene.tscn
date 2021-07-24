@@ -6,36 +6,35 @@
 
 [node name="TestScene" type="Node2D"]
 
-[node name="YSort" type="YSort" parent="."]
+[node name="World" type="YSort" parent="."]
 
-[node name="Player" parent="YSort" groups=[
+[node name="Player" parent="World" groups=[
 "Player",
 ] instance=ExtResource( 1 )]
-speed = 5
 
-[node name="Zombie" parent="YSort" groups=[
+[node name="Zombie" parent="World" groups=[
 "Enemies",
 ] instance=ExtResource( 2 )]
 position = Vector2( -405.774, 212.952 )
 target_path = NodePath("../Player")
 
-[node name="Zombie2" parent="YSort" groups=[
+[node name="Zombie2" parent="World" groups=[
 "Enemies",
 ] instance=ExtResource( 2 )]
 position = Vector2( 415.31, -204.476 )
 target_path = NodePath("../Player")
 
-[node name="Zombie3" parent="YSort" groups=[
+[node name="Zombie3" parent="World" groups=[
 "Enemies",
 ] instance=ExtResource( 2 )]
 position = Vector2( 421.666, 207.655 )
 target_path = NodePath("../Player")
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
-player_path = NodePath("../YSort/Player")
+player_path = NodePath("../World/Player")
 
-[connection signal="player_dead" from="YSort/Player" to="YSort/Zombie" method="_on_Player_player_dead"]
-[connection signal="player_dead" from="YSort/Player" to="HUD" method="_on_Player_player_dead"]
-[connection signal="player_dead" from="YSort/Player" to="YSort/Zombie3" method="_on_Player_player_dead"]
-[connection signal="player_dead" from="YSort/Player" to="YSort/Zombie2" method="_on_Player_player_dead"]
-[connection signal="player_hit" from="YSort/Player" to="HUD" method="_on_Player_player_hit"]
+[connection signal="player_dead" from="World/Player" to="World/Zombie2" method="_on_Player_player_dead"]
+[connection signal="player_dead" from="World/Player" to="World/Zombie" method="_on_Player_player_dead"]
+[connection signal="player_dead" from="World/Player" to="HUD" method="_on_Player_player_dead"]
+[connection signal="player_dead" from="World/Player" to="World/Zombie3" method="_on_Player_player_dead"]
+[connection signal="player_hit" from="World/Player" to="HUD" method="_on_Player_player_hit"]

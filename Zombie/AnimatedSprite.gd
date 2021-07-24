@@ -12,3 +12,7 @@ func _on_Zombie_zombie_idle():
 
 func _on_Zombie_zombie_attack(_target):
 	play("attack")
+
+
+func _on_Zombie_zombie_dead():
+	play("dead")
