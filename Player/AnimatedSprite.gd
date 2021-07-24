@@ -12,3 +12,7 @@ func _on_Player_player_motion(velocity):
 
 func _on_Player_player_idle():
 	play("default")
+
+
+func _on_Player_player_dead():
+	play("dead")

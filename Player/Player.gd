@@ -21,6 +21,9 @@ signal player_hit
 signal player_dead
 
 func _process(_delta):
+	if (state == STATE.DEAD):
+		return
+
 	animatedSprite.flip_h = get_local_mouse_position().x <= 0
 
 func _physics_process(_delta):

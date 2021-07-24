@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Player/player_default-2.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
@@ -8,6 +8,15 @@
 [ext_resource path="res://Player/player_move-3.png" type="Texture" id=6]
 [ext_resource path="res://Player/player_move-1.png" type="Texture" id=7]
 [ext_resource path="res://Player/AnimatedSprite.gd" type="Script" id=8]
+[ext_resource path="res://Player/player_dead-7.png" type="Texture" id=9]
+[ext_resource path="res://Player/player_dead-6.png" type="Texture" id=10]
+[ext_resource path="res://Player/player_dead-5.png" type="Texture" id=11]
+[ext_resource path="res://Player/player_dead-4.png" type="Texture" id=12]
+[ext_resource path="res://Player/player_dead-2.png" type="Texture" id=13]
+[ext_resource path="res://Player/player_dead-3.png" type="Texture" id=14]
+[ext_resource path="res://Player/player_dead-1.png" type="Texture" id=15]
+[ext_resource path="res://Shotgun/Shotgun.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Player/Weapon.gd" type="Script" id=17]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -15,6 +24,11 @@ animations = [ {
 "loop": true,
 "name": "default",
 "speed": 4.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 9 ) ],
+"loop": false,
+"name": "dead",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 7 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ) ],
 "loop": true,
@@ -32,6 +46,7 @@ radius = 25.0
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
+speed = 5
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -40,7 +55,6 @@ drag_margin_v_enabled = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 1
 playing = true
 script = ExtResource( 8 )
 
@@ -48,5 +62,13 @@ script = ExtResource( 8 )
 position = Vector2( 0, -0.15749 )
 shape = SubResource( 2 )
 
+[node name="Weapon" type="Node2D" parent="."]
+script = ExtResource( 17 )
+
+[node name="Shotgun" parent="Weapon" instance=ExtResource( 16 )]
+position = Vector2( 30.7013, 4.00452 )
+
+[connection signal="player_dead" from="." to="AnimatedSprite" method="_on_Player_player_dead"]
+[connection signal="player_dead" from="." to="Weapon" method="_on_Player_player_dead"]
 [connection signal="player_idle" from="." to="AnimatedSprite" method="_on_Player_player_idle"]
 [connection signal="player_motion" from="." to="AnimatedSprite" method="_on_Player_player_motion"]

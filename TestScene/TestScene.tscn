@@ -34,8 +34,8 @@ target_path = NodePath("../Player")
 [node name="HUD" parent="." instance=ExtResource( 3 )]
 player_path = NodePath("../YSort/Player")
 
-[connection signal="player_dead" from="YSort/Player" to="YSort/Zombie3" method="_on_Player_player_dead"]
-[connection signal="player_dead" from="YSort/Player" to="HUD" method="_on_Player_player_dead"]
 [connection signal="player_dead" from="YSort/Player" to="YSort/Zombie" method="_on_Player_player_dead"]
+[connection signal="player_dead" from="YSort/Player" to="HUD" method="_on_Player_player_dead"]
+[connection signal="player_dead" from="YSort/Player" to="YSort/Zombie3" method="_on_Player_player_dead"]
 [connection signal="player_dead" from="YSort/Player" to="YSort/Zombie2" method="_on_Player_player_dead"]
 [connection signal="player_hit" from="YSort/Player" to="HUD" method="_on_Player_player_hit"]
