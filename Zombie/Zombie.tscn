@@ -83,9 +83,9 @@ shape = SubResource( 4 )
 
 [connection signal="zombie_attack" from="." to="AnimatedSprite" method="_on_Zombie_zombie_attack"]
 [connection signal="zombie_attack" from="." to="AttackTimer" method="_on_Zombie_zombie_attack"]
-[connection signal="zombie_dead" from="." to="AttackZone" method="_on_Zombie_zombie_dead"]
-[connection signal="zombie_dead" from="." to="." method="_on_Zombie_zombie_dead"]
 [connection signal="zombie_dead" from="." to="AnimatedSprite" method="_on_Zombie_zombie_dead"]
+[connection signal="zombie_dead" from="." to="." method="_on_Zombie_zombie_dead"]
+[connection signal="zombie_dead" from="." to="AttackZone" method="_on_Zombie_zombie_dead"]
 [connection signal="zombie_idle" from="." to="AnimatedSprite" method="_on_Zombie_zombie_idle"]
 [connection signal="zombie_idle" from="." to="AttackTimer" method="_on_Zombie_zombie_idle"]
 [connection signal="zombie_motion" from="." to="AnimatedSprite" method="_on_Zombie_zombie_motion"]

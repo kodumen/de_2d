@@ -1,16 +1,20 @@
 extends Area2D
 
 
-signal hitbox_hit(damage)
+onready var blood = $Blood
 
 var collisionShape:CollisionShape2D
+
+signal hitbox_hit(damage)
 
 func _ready():
 	collisionShape = get_collision_shape()
 
 func hit(damage):
 	emit_signal("hitbox_hit", damage)
-	
+
+func clash(clash_position):
+	blood.create_effect(clash_position)
 
 func get_collision_shape():
 	for node in get_children():

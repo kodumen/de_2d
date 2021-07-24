@@ -18,6 +18,8 @@ func _on_ShotgunProjectile_area_entered(area: Area2D):
 
 func on_hit(collider):
 	print_debug(name + " hit " + str(collider.get_path()))
+	if (collider.has_method("clash")):
+		collider.clash(global_position)
 	if (collider.has_method("hit")):
 		collider.hit(damage)
 		queue_free()
