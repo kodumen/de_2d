@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Zombie/Zombie.tscn" type="PackedScene" id=2]
+
+[node name="TestScene" type="Node2D"]
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 1 )]
+speed = 5
+
+[node name="Zombie" parent="YSort" groups=[
+"Enemies",
+] instance=ExtResource( 2 )]
+position = Vector2( -405.774, 212.952 )
+target_path = NodePath("../Player")
+speed = 1
+
+[node name="Zombie2" parent="YSort" groups=[
+"Enemies",
+] instance=ExtResource( 2 )]
+position = Vector2( 415.31, -204.476 )
+target_path = NodePath("../Player")
+speed = 1
+
+[node name="Zombie3" parent="YSort" groups=[
+"Enemies",
+] instance=ExtResource( 2 )]
+position = Vector2( 421.666, 207.655 )
+target_path = NodePath("../Player")
+speed = 1
