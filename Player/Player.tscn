@@ -30,14 +30,14 @@ animations = [ {
 "name": "dead",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 7 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "move",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "move_reversed",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "move",
 "speed": 10.0
 } ]
 
@@ -68,7 +68,7 @@ script = ExtResource( 17 )
 [node name="Shotgun" parent="Weapon" instance=ExtResource( 16 )]
 position = Vector2( 30.7013, 4.00452 )
 
-[connection signal="player_dead" from="." to="AnimatedSprite" method="_on_Player_player_dead"]
 [connection signal="player_dead" from="." to="Weapon" method="_on_Player_player_dead"]
+[connection signal="player_dead" from="." to="AnimatedSprite" method="_on_Player_player_dead"]
 [connection signal="player_idle" from="." to="AnimatedSprite" method="_on_Player_player_idle"]
 [connection signal="player_motion" from="." to="AnimatedSprite" method="_on_Player_player_motion"]

@@ -78,6 +78,10 @@ func _on_Player_player_dead():
 	state = STATE.IDLE
 	emit_signal("zombie_idle")
 
-
 func _on_Zombie_zombie_dead():
 	$MovementCollision.set_deferred("disabled", true)
+	$HitBox.disabled(true)
+
+
+func _on_HitBox_hitbox_hit(damage):
+	hit(damage)
