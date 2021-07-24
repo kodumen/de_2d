@@ -1,5 +1,10 @@
 extends KinematicBody2D
 
+enum STATE {
+	IDLE
+	MOVING
+	DEAD
+}
 
 export var health = 100
 export var armor = 50
@@ -8,13 +13,20 @@ export var speed = 50
 
 onready var animatedSprite = $AnimatedSprite
 
+var state = STATE.IDLE
+
 signal player_motion(velocity)
 signal player_idle
+signal player_hit
+signal player_dead
 
 func _process(_delta):
 	animatedSprite.flip_h = get_local_mouse_position().x <= 0
 
 func _physics_process(_delta):
+	if (state == STATE.DEAD):
+		return
+	
 	var velocity = Vector2()
 	
 	# Movement
@@ -32,9 +44,24 @@ func _physics_process(_delta):
 	velocity *= speed
 	
 	if (velocity.length() > 0):
+		state = STATE.MOVING
 		emit_signal("player_motion", velocity)
 	else:
+		state = STATE.IDLE
 		emit_signal("player_idle")
 	
 	move_and_collide(velocity)
 		
+func hit(damage):
+	armor -= damage
+	
+	if (armor < 0):
+		health -= abs(armor)
+		health = max(health, 0)
+		armor = 0
+	
+	emit_signal("player_hit")
+	
+	if (health == 0):
+		state = STATE.DEAD
+		emit_signal("player_dead")
