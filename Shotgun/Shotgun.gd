@@ -1,14 +1,27 @@
 extends AnimatedSprite
 
-onready var PROJECTILE = preload("res://Shotgun/ShotgunProjectile.tscn")
-onready var world = $"/root".get_child(0).get_node("World")
-onready var muzzle = $Muzzle
+onready var timer = $Timer
+onready var rayCast = $RayCast2D
 
+export(int) var damage = 50
+export(float) var fire_cooldown = 1
+
+var can_fire = true
 
 func fire():
-	if (world != null):
-		var projectile = PROJECTILE.instance()
-		world.add_child(projectile)
-		var projectileScale = projectile.scale
-		projectile.transform = muzzle.global_transform
-		projectile.scale = projectileScale
+	if (! can_fire):
+		return
+	
+	var collider = rayCast.get_collider()
+	if (collider):
+		print_debug(name + " hit " + collider.name)
+		if (collider.has_method("hit")):
+			collider.hit(damage, rayCast.get_collision_point())
+	else:
+		print_debug(name + " did not hit anything")
+		
+	can_fire = false
+	timer.start(fire_cooldown)
+
+func _on_Timer_timeout():
+	can_fire = true

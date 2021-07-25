@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/shotgun_projectile.png-d217027048fc890f8d9324824099c6d9.stex"
+path="res://.import/blood-1.png-c7a621520e678409c2fb6fd4e81ed513.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Shotgun/shotgun_projectile.png"
-dest_files=[ "res://.import/shotgun_projectile.png-d217027048fc890f8d9324824099c6d9.stex" ]
+source_file="res://common/Blood/blood-1.png"
+dest_files=[ "res://.import/blood-1.png-c7a621520e678409c2fb6fd4e81ed513.stex" ]
 
 [params]
 

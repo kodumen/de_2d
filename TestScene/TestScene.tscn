@@ -34,7 +34,7 @@ target_path = NodePath("../Player")
 player_path = NodePath("../World/Player")
 
 [connection signal="player_dead" from="World/Player" to="World/Zombie3" method="_on_Player_player_dead"]
+[connection signal="player_dead" from="World/Player" to="HUD" method="_on_Player_player_dead"]
 [connection signal="player_dead" from="World/Player" to="World/Zombie" method="_on_Player_player_dead"]
 [connection signal="player_dead" from="World/Player" to="World/Zombie2" method="_on_Player_player_dead"]
-[connection signal="player_dead" from="World/Player" to="HUD" method="_on_Player_player_dead"]
 [connection signal="player_hit" from="World/Player" to="HUD" method="_on_Player_player_hit"]

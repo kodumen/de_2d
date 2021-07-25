@@ -15,6 +15,17 @@ animations = [ {
 frames = SubResource( 1 )
 playing = true
 script = ExtResource( 3 )
+fire_cooldown = 0.7
 
-[node name="Muzzle" type="Node2D" parent="."]
-position = Vector2( 56.1865, -4.49492 )
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 57.6848, -4.49492 )
+enabled = true
+cast_to = Vector2( 350, 0 )
+collision_mask = 262144
+collide_with_areas = true
+collide_with_bodies = false
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

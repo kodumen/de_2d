@@ -1,14 +1,8 @@
-extends Node2D
+extends AnimatedSprite
 
 
-onready var BLOOD_EFFECT = preload("res://common/Blood/BloodEffect.tscn")
+func _ready():
+	playing = true
 
-func create_effect(effect_position):
-	var effect = BLOOD_EFFECT.instance()
-	add_child(effect)
-	effect.global_position = effect_position
-	effect.playing = true
-	effect.connect("animation_finished", self, "on_effect_animation_finished", [effect])
-	
-func on_effect_animation_finished(effect):
-	effect.queue_free()
+func _on_BloodEffect_animation_finished():
+	queue_free()

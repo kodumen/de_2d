@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/blood_src-3.png-00658fe25b3f4986b6c59e324213901d.stex"
+path="res://.import/blood-3.png-26450f88517ca1d0b9e26715fbacebc7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://common/Blood/blood_src-3.png"
-dest_files=[ "res://.import/blood_src-3.png-00658fe25b3f4986b6c59e324213901d.stex" ]
+source_file="res://common/Blood/blood-3.png"
+dest_files=[ "res://.import/blood-3.png-26450f88517ca1d0b9e26715fbacebc7.stex" ]
 
 [params]
 
