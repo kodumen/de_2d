@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Zombie/Zombie.tscn" type="PackedScene" id=2]
 [ext_resource path="res://HUD/HUD.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Imp/Imp.tscn" type="PackedScene" id=4]
 
 [node name="TestScene" type="Node2D"]
 
@@ -30,11 +31,23 @@ target_path = NodePath("../Player")
 position = Vector2( 421.666, 207.655 )
 target_path = NodePath("../Player")
 
+[node name="Imp" parent="World" instance=ExtResource( 4 )]
+position = Vector2( -169.706, -182.434 )
+target_path = NodePath("../Player")
+
+[node name="Imp2" parent="World" instance=ExtResource( 4 )]
+position = Vector2( 60.8112, 332.34 )
+target_path = NodePath("../Player")
+
+[node name="Imp3" parent="World" instance=ExtResource( 4 )]
+position = Vector2( -523.259, -142.836 )
+target_path = NodePath("../Player")
+
 [node name="HUD" parent="." instance=ExtResource( 3 )]
 player_path = NodePath("../World/Player")
 
-[connection signal="player_dead" from="World/Player" to="HUD" method="_on_Player_player_dead"]
-[connection signal="player_dead" from="World/Player" to="World/Zombie3" method="_on_Player_player_dead"]
-[connection signal="player_dead" from="World/Player" to="World/Zombie" method="_on_Player_player_dead"]
 [connection signal="player_dead" from="World/Player" to="World/Zombie2" method="_on_Player_player_dead"]
+[connection signal="player_dead" from="World/Player" to="World/Zombie3" method="_on_Player_player_dead"]
+[connection signal="player_dead" from="World/Player" to="HUD" method="_on_Player_player_dead"]
+[connection signal="player_dead" from="World/Player" to="World/Zombie" method="_on_Player_player_dead"]
 [connection signal="player_hit" from="World/Player" to="HUD" method="_on_Player_player_hit"]
