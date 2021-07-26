@@ -25,14 +25,9 @@ tile_data = PoolIntArray( -393218, 0, 0, -393217, 0, 0, -458752, 0, 0, -458751, 
 
 [node name="Zombie" parent="World" instance=ExtResource( 2 )]
 position = Vector2( 252.269, 147.998 )
-target_player = false
 
 [node name="Imp" parent="World" instance=ExtResource( 5 )]
 position = Vector2( -334.677, -208.542 )
-target_player = false
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
 player_path = NodePath("../World/Player")
-
-[connection signal="player_dead" from="World/Player" to="HUD" method="_on_Player_player_dead"]
-[connection signal="player_hit" from="World/Player" to="HUD" method="_on_Player_player_hit"]

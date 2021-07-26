@@ -1,24 +1,28 @@
 extends Timer
 
 
-onready var zombie = $"./../"
+onready var zombie = get_parent()
 
 var target
-
-func _on_Zombie_zombie_attack(_target):
-	target = _target
-	start()
 
 func _on_AttackTimer_timeout():
 	if (target != null):
 		target.hit(zombie.attack)
 
-func _on_Zombie_zombie_motion(_velocity):
-	stopAttack()
-
-func _on_Zombie_zombie_idle():
-	stopAttack()
 
 func stopAttack():
 	target = null
 	stop()
+
+
+func _on_Zombie_state_attacking(target_node):
+	target = target_node
+	start()
+
+
+func _on_Zombie_state_moving(_velocity):
+	stopAttack()
+
+
+func _on_Zombie_state_idle():
+	stopAttack()

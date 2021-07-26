@@ -27,5 +27,5 @@ func _physics_process(_delta):
 		activeWeapon.fire()
 
 
-func _on_Player_player_dead():
+func _on_Player_state_dead():
 	visible = false

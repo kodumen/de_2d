@@ -12,17 +12,23 @@ onready var gameOver = $GameOver
 func _ready():
 	if (player_path):
 		player = get_node(player_path)
+	else:
+		player = DependencyInjector.player
+		
+	if player:
 		_update_hud()
+		player.connect("state_dead", self, "_on_Player_state_dead")
+		player.connect("state_hit", self, "_on_Player_state_hit")
 
 
-func _on_Player_player_hit():
+func _on_Player_state_hit():
 	_update_hud()
+
 
 func _update_hud():
 	healthLabel.text = "Health: " + str(player.health)
 	armorLabel.text = "Armor: " + str(player.armor)
 
 
-
-func _on_Player_player_dead():
+func _on_Player_state_dead():
 	gameOver.visible = true

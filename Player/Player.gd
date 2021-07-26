@@ -15,16 +15,17 @@ onready var animatedSprite = $AnimatedSprite
 
 var state = STATE.IDLE
 
-signal player_motion(velocity)
-signal player_idle
-signal player_hit
-signal player_dead
+signal state_motion(velocity)
+signal state_idle
+signal state_hit
+signal state_dead
 
 func _process(_delta):
-	if (state == STATE.DEAD):
+	if state == STATE.DEAD:
 		return
 
 	animatedSprite.flip_h = get_local_mouse_position().x <= 0
+
 
 func _physics_process(delta):
 	if (state == STATE.DEAD):
@@ -48,13 +49,14 @@ func _physics_process(delta):
 	
 	if (velocity.length() > 0):
 		state = STATE.MOVING
-		emit_signal("player_motion", velocity)
+		emit_signal("state_motion", velocity)
 	else:
 		state = STATE.IDLE
-		emit_signal("player_idle")
+		emit_signal("state_idle")
 	
 	move_and_collide(velocity)
-		
+
+
 func hit(damage):
 	armor -= damage
 	
@@ -63,8 +65,9 @@ func hit(damage):
 		health = max(health, 0)
 		armor = 0
 	
-	emit_signal("player_hit")
+	emit_signal("state_hit")
 	
 	if (health == 0):
+		print_debug("%s is dead!" % name)
 		state = STATE.DEAD
-		emit_signal("player_dead")
+		emit_signal("state_dead")

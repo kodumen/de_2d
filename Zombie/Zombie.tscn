@@ -74,6 +74,7 @@ shape = SubResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )
+frame = 1
 playing = true
 script = ExtResource( 8 )
 
@@ -92,6 +93,9 @@ width = 4.0
 width_curve = SubResource( 5 )
 default_color = Color( 0.0235294, 1, 0.0392157, 1 )
 
+[connection signal="state_attacking" from="." to="AttackTimer" method="_on_Zombie_state_attacking"]
+[connection signal="state_idle" from="." to="AttackTimer" method="_on_Zombie_state_idle"]
+[connection signal="state_moving" from="." to="AttackTimer" method="_on_Zombie_state_moving"]
 [connection signal="body_entered" from="AttackZone" to="." method="_on_AttackZone_body_entered"]
 [connection signal="body_exited" from="AttackZone" to="." method="_on_AttackZone_body_exited"]
 [connection signal="timeout" from="AttackTimer" to="AttackTimer" method="_on_AttackTimer_timeout"]

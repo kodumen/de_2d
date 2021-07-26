@@ -29,7 +29,7 @@ var path_line:Line2D
 
 signal state_idle
 signal state_moving(velocity)
-signal state_attacking
+signal state_attacking(target)
 signal state_dead
 
 
@@ -52,15 +52,19 @@ func _ready():
 	# Connect animated_sprite listeners
 	if animated_sprite:
 		var listeners = {
-			"state_moving": "_on_Enemy_state_moving"
+			"state_idle": "_on_Enemy_state_idle",
+			"state_moving": "_on_Enemy_state_moving",
+			"state_attacking": "_on_Enemy_state_attacking"
 		}
 		for enemy_signal in listeners:
 			if animated_sprite.has_method(listeners[enemy_signal]):
 				connect(enemy_signal, animated_sprite, listeners[enemy_signal])
+	
+	# Should we add another ready hook (e.g. _enemy_ready_final())?
 
 
-# Initializer function for the enemy class. This is called before _ready().
-# Feel free to override this.
+# Initializer function for the enemy class. This is called at the very start of
+# _ready(). Feel free to override this.
 func _enemy_ready():
 	pass
 
@@ -87,6 +91,10 @@ func set_target(value:Node2D):
 	target = value
 	set_state(STATE.MOVING)
 	print_debug("%s is targeting %s!" % [name, target.name])
+	
+	# Hard-code signal bindings to the player for convenience (??).
+	if target.is_in_group("Player"):
+		target.connect("state_dead", self, "_on_target_state_dead")
 
 
 func set_state(value:int):
@@ -99,7 +107,7 @@ func set_state(value:int):
 
 # Find the path to the target position and return the nearest stop.
 func find_next_stop(target_position) -> Vector2:
-	var path = nav_2d.get_simple_path(global_position, target.global_position)
+	var path = nav_2d.get_simple_path(global_position, target_position)
 	
 	# Draw the path for debugging purposes.
 	if path_line:
@@ -108,7 +116,11 @@ func find_next_stop(target_position) -> Vector2:
 			localized_path.append(path[path_index] - global_position)
 		path_line.points = localized_path
 	
-	if (path.size() >= 2):
+	if path.size() >= 2:
 		return path[1]
 	
 	return global_position
+	
+
+func _on_target_state_dead():
+	set_state(STATE.IDLE)

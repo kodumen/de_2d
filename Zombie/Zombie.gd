@@ -24,19 +24,15 @@ func hit(damage):
 	
 
 func _on_AttackZone_body_entered(body: Node2D):
-	if (body.is_in_group("Player")):
+	if (body == target):
 		print_debug(name + " attacks!")
-		state = STATE.ATTACKING
-		emit_signal("zombie_attack", body)
+		set_state(STATE.ATTACKING)
+		emit_signal("state_attacking", body)
 
 func _on_AttackZone_body_exited(body):
-	if (body.is_in_group("Player")):
+	if (body == target):
 		print_debug(name + " stops attacking!")
 		state = STATE.MOVING
-
-func _on_Player_player_dead():
-	state = STATE.IDLE
-	emit_signal("zombie_idle")
 
 func _on_Zombie_zombie_dead():
 	$MovementCollision.set_deferred("disabled", true)
