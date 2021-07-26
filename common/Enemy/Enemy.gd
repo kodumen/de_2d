@@ -1,6 +1,9 @@
 extends KinematicBody2D
 
 
+class_name Enemy
+
+
 enum STATE {
 	IDLE,
 	MOVING,
@@ -23,14 +26,22 @@ export(STATE) var state = STATE.IDLE setget set_state
 var target:Node2D setget set_target
 var nav_2d:Navigation2D
 var animated_sprite:AnimatedSprite
+var hit_box:HitBox
+var movement_collider:CollisionShape2D
+# If a custom hit box is used, default listeners will not
+# be connected. You must call the hit() method to deal damage to the
+# enemy. You can then ignore the hit_box property. Use this for weakpoints.
+var use_custom_hit_box:bool = false
 # A Line2D node used to see the enemy's path.
 var path_line:Line2D
 
 
 signal state_idle
 signal state_moving(velocity)
+# warning-ignore:unused_signal
 signal state_attacking(target)
 signal state_dead
+signal hit(damage)
 
 
 func _ready():
@@ -54,11 +65,29 @@ func _ready():
 		var listeners = {
 			"state_idle": "_on_Enemy_state_idle",
 			"state_moving": "_on_Enemy_state_moving",
-			"state_attacking": "_on_Enemy_state_attacking"
+			"state_attacking": "_on_Enemy_state_attacking",
+			"state_dead": "_on_Enemy_state_dead"
 		}
 		for enemy_signal in listeners:
 			if animated_sprite.has_method(listeners[enemy_signal]):
+				# warning-ignore:return_value_discarded
 				connect(enemy_signal, animated_sprite, listeners[enemy_signal])
+	
+	# Configure hit_box
+	if ! use_custom_hit_box and hit_box:
+		# warning-ignore:return_value_discarded
+		hit_box.connect("hit", self, "_on_hit_box_hit")
+		
+	# Find and configure the movement collider
+	if ! movement_collider:
+		for child in get_children():
+			if child is CollisionShape2D:
+				movement_collider = child
+				break
+		
+	# warning-ignore:return_value_discarded
+	connect("state_dead", self, "_on_Enemy_state_dead")
+		
 	
 	# Should we add another ready hook (e.g. _enemy_ready_final())?
 
@@ -84,6 +113,7 @@ func _physics_process(delta):
 	else:
 		emit_signal("state_idle")
 	
+# warning-ignore:return_value_discarded
 	move_and_collide(velocity)
 
 
@@ -94,6 +124,7 @@ func set_target(value:Node2D):
 	
 	# Hard-code signal bindings to the player for convenience (??).
 	if target.is_in_group("Player"):
+		# warning-ignore:return_value_discarded
 		target.connect("state_dead", self, "_on_target_state_dead")
 
 
@@ -124,3 +155,26 @@ func find_next_stop(target_position) -> Vector2:
 
 func _on_target_state_dead():
 	set_state(STATE.IDLE)
+	
+	
+func _on_hit_box_hit(damage):
+	hit(damage)
+
+
+func hit(damage):
+	armor -= damage
+	
+	if (armor < 0):
+		health -= abs(armor)
+		health = max(health, 0)
+		armor = 0
+	
+	emit_signal("hit", damage)
+	
+	if (health == 0):
+		state = STATE.DEAD
+		emit_signal("state_dead")
+		
+
+func _on_Enemy_state_dead():
+	movement_collider.set_deferred("disabled", true)

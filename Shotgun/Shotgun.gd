@@ -10,9 +10,7 @@ var can_fire = true
 
 
 func _ready():
-	world = $"/root".get_child(0).get_node("World")
-	if (! world):
-		world = $"/root".get_child(0)
+	world = DependencyInjector.world
 		
 	for child in get_children():
 		if (child is RayCast2D):

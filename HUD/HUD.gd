@@ -18,10 +18,10 @@ func _ready():
 	if player:
 		_update_hud()
 		player.connect("state_dead", self, "_on_Player_state_dead")
-		player.connect("state_hit", self, "_on_Player_state_hit")
+		player.connect("hit", self, "_on_Player_hit")
 
 
-func _on_Player_state_hit():
+func _on_Player_hit():
 	_update_hud()
 
 

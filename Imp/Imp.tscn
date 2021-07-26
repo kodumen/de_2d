@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Imp/imp_default-1.png" type="Texture" id=1]
 [ext_resource path="res://Imp/imp_default-2.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Imp/imp_move-1.png" type="Texture" id=6]
 [ext_resource path="res://Imp/Imp.gd" type="Script" id=7]
 [ext_resource path="res://common/Enemy/EnemyAnimatedSprite.gd" type="Script" id=8]
+[ext_resource path="res://common/HitBox.tscn" type="PackedScene" id=11]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 30.0
@@ -28,6 +29,10 @@ animations = [ {
 [sub_resource type="Curve" id=4]
 _data = [ Vector2( 0.498471, 1 ), 0.0, 0.0, 0, 0 ]
 
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 40.6127
+height = 36.7925
+
 [node name="Imp" type="KinematicBody2D"]
 script = ExtResource( 7 )
 
@@ -45,3 +50,9 @@ script = ExtResource( 8 )
 width = 4.0
 width_curve = SubResource( 4 )
 default_color = Color( 0.14902, 1, 0, 1 )
+
+[node name="HitBox" parent="." instance=ExtResource( 11 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2( 0, -9.34386 )
+shape = SubResource( 5 )

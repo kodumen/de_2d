@@ -2,7 +2,8 @@ extends Node2D
 
 
 var player:Node2D setget , get_player
-var nav_2d:Navigation2D setget, get_nav_2d
+var nav_2d:Navigation2D setget , get_nav_2d
+var world:Node2D setget , get_world
 
 
 func get_player() -> Node2D:
@@ -19,3 +20,11 @@ func get_nav_2d() -> Navigation2D:
 		nav_2d = nav_2ds[0]
 		
 	return nav_2d
+
+
+func get_world() -> Node2D:
+	var worlds = get_tree().get_nodes_in_group("World")
+	if (len(worlds) > 0):
+		world = worlds[0]
+		
+	return world

@@ -13,3 +13,7 @@ func _on_Enemy_state_attacking(_target):
 
 func _on_Enemy_state_idle():
 	play("default")
+	
+
+func _on_Enemy_state_dead():
+	play("dead")

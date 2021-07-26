@@ -17,7 +17,7 @@ var state = STATE.IDLE
 
 signal state_motion(velocity)
 signal state_idle
-signal state_hit
+signal hit
 signal state_dead
 
 func _process(_delta):
@@ -54,6 +54,7 @@ func _physics_process(delta):
 		state = STATE.IDLE
 		emit_signal("state_idle")
 	
+	# warning-ignore:return_value_discarded
 	move_and_collide(velocity)
 
 
