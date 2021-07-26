@@ -20,8 +20,3 @@ func _on_AttackZone_body_exited(body):
 	if (body == target):
 		print_debug(name + " stops attacking!")
 		state = STATE.MOVING
-
-func _on_Zombie_zombie_dead():
-	$MovementCollision.set_deferred("disabled", true)
-	$HitBox.disabled(true)
-

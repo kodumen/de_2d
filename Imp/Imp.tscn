@@ -42,7 +42,6 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -13 )
 frames = SubResource( 2 )
-frame = 1
 playing = true
 script = ExtResource( 8 )
 

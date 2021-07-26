@@ -88,7 +88,6 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	connect("state_dead", self, "_on_Enemy_state_dead")
 		
-	
 	# Should we add another ready hook (e.g. _enemy_ready_final())?
 
 
@@ -113,7 +112,7 @@ func _physics_process(delta):
 	else:
 		emit_signal("state_idle")
 	
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	move_and_collide(velocity)
 
 
@@ -164,17 +163,17 @@ func _on_hit_box_hit(damage):
 func hit(damage):
 	armor -= damage
 	
-	if (armor < 0):
+	if armor < 0:
 		health -= abs(armor)
 		health = max(health, 0)
 		armor = 0
 	
 	emit_signal("hit", damage)
 	
-	if (health == 0):
-		state = STATE.DEAD
-		emit_signal("state_dead")
+	if health == 0:
+		set_state(STATE.DEAD)
 		
 
 func _on_Enemy_state_dead():
 	movement_collider.set_deferred("disabled", true)
+	hit_box.disabled(true)

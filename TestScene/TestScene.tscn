@@ -28,8 +28,17 @@ tile_data = PoolIntArray( -393218, 0, 0, -393217, 0, 0, -458752, 0, 0, -458751, 
 [node name="Zombie" parent="World" instance=ExtResource( 2 )]
 position = Vector2( 252.269, 147.998 )
 
+[node name="Zombie2" parent="World" instance=ExtResource( 2 )]
+position = Vector2( -184.997, -216.951 )
+
 [node name="Imp" parent="World" instance=ExtResource( 5 )]
 position = Vector2( -334.677, -208.542 )
+
+[node name="Imp2" parent="World" instance=ExtResource( 5 )]
+position = Vector2( 433.902, -156.407 )
+
+[node name="Imp3" parent="World" instance=ExtResource( 5 )]
+position = Vector2( -390.176, 223.678 )
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
 player_path = NodePath("../World/Player")
