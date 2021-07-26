@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Zombie/zombie_default-1.png" type="Texture" id=1]
 [ext_resource path="res://Zombie/Zombie.gd" type="Script" id=2]
@@ -7,7 +7,7 @@
 [ext_resource path="res://Zombie/zombie_move-4.png" type="Texture" id=5]
 [ext_resource path="res://Zombie/zombie_move-2.png" type="Texture" id=6]
 [ext_resource path="res://Zombie/zombie_move-1.png" type="Texture" id=7]
-[ext_resource path="res://Zombie/AnimatedSprite.gd" type="Script" id=8]
+[ext_resource path="res://common/Enemy/EnemyAnimatedSprite.gd" type="Script" id=8]
 [ext_resource path="res://Zombie/zombie_attack-1.png" type="Texture" id=9]
 [ext_resource path="res://Zombie/zombie_attack-2.png" type="Texture" id=10]
 [ext_resource path="res://Zombie/zombie_attack-3.png" type="Texture" id=11]
@@ -55,8 +55,12 @@ animations = [ {
 radius = 22.7418
 height = 67.0424
 
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0 ]
+
 [node name="Zombie" type="KinematicBody2D"]
 script = ExtResource( 2 )
+speed = 10
 
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -70,7 +74,6 @@ shape = SubResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )
-frame = 1
 playing = true
 script = ExtResource( 8 )
 
@@ -83,15 +86,12 @@ hit_effect = ExtResource( 21 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource( 4 )
 
-[connection signal="zombie_attack" from="." to="AttackTimer" method="_on_Zombie_zombie_attack"]
-[connection signal="zombie_attack" from="." to="AnimatedSprite" method="_on_Zombie_zombie_attack"]
-[connection signal="zombie_dead" from="." to="." method="_on_Zombie_zombie_dead"]
-[connection signal="zombie_dead" from="." to="AttackZone" method="_on_Zombie_zombie_dead"]
-[connection signal="zombie_dead" from="." to="AnimatedSprite" method="_on_Zombie_zombie_dead"]
-[connection signal="zombie_idle" from="." to="AttackTimer" method="_on_Zombie_zombie_idle"]
-[connection signal="zombie_idle" from="." to="AnimatedSprite" method="_on_Zombie_zombie_idle"]
-[connection signal="zombie_motion" from="." to="AttackTimer" method="_on_Zombie_zombie_motion"]
-[connection signal="zombie_motion" from="." to="AnimatedSprite" method="_on_Zombie_zombie_motion"]
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 0 )
+width = 4.0
+width_curve = SubResource( 5 )
+default_color = Color( 0.0235294, 1, 0.0392157, 1 )
+
 [connection signal="body_entered" from="AttackZone" to="." method="_on_AttackZone_body_entered"]
 [connection signal="body_exited" from="AttackZone" to="." method="_on_AttackZone_body_exited"]
 [connection signal="timeout" from="AttackTimer" to="AttackTimer" method="_on_AttackTimer_timeout"]

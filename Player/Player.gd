@@ -26,7 +26,7 @@ func _process(_delta):
 
 	animatedSprite.flip_h = get_local_mouse_position().x <= 0
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if (state == STATE.DEAD):
 		return
 	
@@ -44,7 +44,7 @@ func _physics_process(_delta):
 		velocity.x = 1
 		
 	velocity = velocity.normalized()
-	velocity *= speed
+	velocity *= speed * delta
 	
 	if (velocity.length() > 0):
 		state = STATE.MOVING

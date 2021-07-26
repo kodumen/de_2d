@@ -14,6 +14,10 @@ config/name="De 2d"
 run/main_scene="res://TestScene/TestScene.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+DependencyInjector="*res://common/DependencyInjector/DependencyInjector.tscn"
+
 [display]
 
 mouse_cursor/custom_image="res://Player/cursor_default.png"
