@@ -140,7 +140,7 @@ func find_next_stop(target_position) -> Vector2:
 	var path = nav_2d.get_simple_path(global_position, target_position)
 	
 	# Draw the path for debugging purposes.
-	if path_line:
+	if path_line and path_line.visible:
 		var localized_path = PoolVector2Array()
 		for path_index in range(path.size()):
 			localized_path.append(path[path_index] - global_position)

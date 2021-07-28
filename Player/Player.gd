@@ -66,7 +66,7 @@ func hit(damage):
 		health = max(health, 0)
 		armor = 0
 	
-	emit_signal("state_hit")
+	emit_signal("hit")
 	
 	if (health == 0):
 		print_debug("%s is dead!" % name)

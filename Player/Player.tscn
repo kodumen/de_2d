@@ -45,16 +45,19 @@ animations = [ {
 radius = 25.0
 
 [node name="Player" type="KinematicBody2D"]
+collision_mask = 2
 script = ExtResource( 2 )
 speed = 300
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 1.25, 1.25 )
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
+frame = 1
 playing = true
 script = ExtResource( 8 )
 
@@ -68,7 +71,7 @@ script = ExtResource( 17 )
 [node name="Shotgun" parent="Weapon" instance=ExtResource( 16 )]
 position = Vector2( 30.7013, 4.00452 )
 
-[connection signal="state_dead" from="." to="AnimatedSprite" method="_on_Player_state_dead"]
 [connection signal="state_dead" from="." to="Weapon" method="_on_Player_state_dead"]
+[connection signal="state_dead" from="." to="AnimatedSprite" method="_on_Player_state_dead"]
 [connection signal="state_idle" from="." to="AnimatedSprite" method="_on_Player_state_idle"]
 [connection signal="state_motion" from="." to="AnimatedSprite" method="_on_Player_state_motion"]
