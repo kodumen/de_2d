@@ -66,7 +66,7 @@ func _ready():
 			"state_idle": "_on_Enemy_state_idle",
 			"state_moving": "_on_Enemy_state_moving",
 			"state_attacking": "_on_Enemy_state_attacking",
-			"state_dead": "_on_Enemy_state_dead"
+			"state_dead": "_on_Enemy_state_dead",
 		}
 		for enemy_signal in listeners:
 			if animated_sprite.has_method(listeners[enemy_signal]):
@@ -131,8 +131,10 @@ func set_state(value:int):
 	state = value
 	if state == STATE.IDLE:
 		emit_signal("state_idle")
-	if state == STATE.DEAD:
+	elif state == STATE.DEAD:
 		emit_signal("state_dead")
+	elif state == STATE.ATTACKING:
+		emit_signal("state_attacking", target)
 
 
 # Find the path to the target position and return the nearest stop.
@@ -153,7 +155,8 @@ func find_next_stop(target_position) -> Vector2:
 	
 
 func _on_target_state_dead():
-	set_state(STATE.IDLE)
+	if state != STATE.DEAD:
+		set_state(STATE.IDLE)
 	
 	
 func _on_hit_box_hit(damage):

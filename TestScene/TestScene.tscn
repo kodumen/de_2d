@@ -53,80 +53,20 @@ navpoly = SubResource( 1 )
 "Player",
 ] instance=ExtResource( 1 )]
 
-[node name="Imp" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 5 )]
-position = Vector2( 594.683, -473.73 )
+[node name="Imp" parent="World" instance=ExtResource( 5 )]
+position = Vector2( -552.251, 47.1434 )
 
-[node name="Imp2" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 5 )]
-position = Vector2( -680.911, -367.784 )
+[node name="Imp2" parent="World" instance=ExtResource( 5 )]
+position = Vector2( 577.472, -471.271 )
 
-[node name="Imp3" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 5 )]
-position = Vector2( 781.148, 755.247 )
+[node name="Imp3" parent="World" instance=ExtResource( 5 )]
+position = Vector2( 682.354, 706.399 )
 
-[node name="Imp4" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 5 )]
-position = Vector2( -752.954, 746.771 )
+[node name="Zombie" parent="World" instance=ExtResource( 2 )]
+position = Vector2( 0, -332.624 )
 
-[node name="Imp5" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 5 )]
-position = Vector2( -742.36, 41.1686 )
-
-[node name="Imp6" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 5 )]
-position = Vector2( 594.683, -22.3991 )
-
-[node name="Imp7" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 5 )]
-position = Vector2( -780.5, -749.191 )
-
-[node name="Zombie" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 2 )]
-position = Vector2( 4.23779, -737.386 )
-
-[node name="Zombie5" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 2 )]
-position = Vector2( -139.849, -283.936 )
-
-[node name="Zombie6" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 2 )]
-position = Vector2( 161.038, -286.055 )
-
-[node name="Zombie7" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 2 )]
-position = Vector2( 182.938, 194.941 )
-
-[node name="Zombie8" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 2 )]
-position = Vector2( -166.685, 192.822 )
-
-[node name="Zombie2" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 2 )]
-position = Vector2( -762.813, 317.839 )
-
-[node name="Zombie4" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 2 )]
-position = Vector2( 8.47571, 720.435 )
-
-[node name="Zombie3" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 2 )]
-position = Vector2( 767.051, 300.887 )
+[node name="Zombie2" parent="World" instance=ExtResource( 2 )]
+position = Vector2( -20.2043, 550.006 )
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
 player_path = NodePath("../World/Player")
