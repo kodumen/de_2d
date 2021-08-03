@@ -55,16 +55,7 @@ navpoly = SubResource( 1 )
 position = Vector2( 556.885, -372.937 )
 
 [node name="Imp" parent="World" instance=ExtResource( 5 )]
-position = Vector2( 125.992, -377.976 )
-
-[node name="Imp2" parent="World" instance=ExtResource( 5 )]
-position = Vector2( -352.778, 115.913 )
-
-[node name="Imp3" parent="World" instance=ExtResource( 5 )]
-position = Vector2( -5.03992, 705.556 )
-
-[node name="Imp4" parent="World" instance=ExtResource( 5 )]
-position = Vector2( 776.111, 750.913 )
+position = Vector2( 70.7108, -322.441 )
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
 player_path = NodePath("../World/Player")

@@ -2,8 +2,8 @@ extends Enemy
 
 
 var ranged_attack_zone_collider: CollisionShape2D
-var sightline:RayCast2D
 var is_target_in_range = false
+var sightline:Sightline
 
 func _enemy_ready():
 	path_line = $Line2D
@@ -17,7 +17,7 @@ func _process(_delta):
 	if state == STATE.DEAD:
 		return
 		
-	if target:
+	if target and sightline:
 		sightline.look_at(target.global_position)
 		
 		
@@ -51,4 +51,4 @@ func _on_Enemy_state_dead():
 	
 	
 func is_sightline_clear():
-	return ! sightline.is_colliding()
+	return sightline and sightline.is_clear()

@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "HitBox",
 "language": "GDScript",
 "path": "res://common/HitBox.gd"
+}, {
+"base": "Node2D",
+"class": "Sightline",
+"language": "GDScript",
+"path": "res://common/Sightline/Sightline.gd"
 } ]
 _global_script_class_icons={
 "Enemy": "",
-"HitBox": ""
+"HitBox": "",
+"Sightline": ""
 }
 
 [application]
