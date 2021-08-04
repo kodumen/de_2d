@@ -9,9 +9,14 @@ func _on_Enemy_state_moving(velocity):
 	play("move")
 
 
-func _on_Enemy_state_attacking(_target):
-	target = _target
-	play("attack")
+func _on_Enemy_state_attack_melee(target_node, _attack):
+	target = target_node
+	play("attack_melee")
+	
+	
+func _on_Enemy_state_attack_ranged(target_node, _attack):
+	target = target_node
+	play("attack_ranged")
 
 
 func _on_Enemy_state_idle():
@@ -23,7 +28,7 @@ func _on_Enemy_state_dead():
 
 
 func _process(_delta):
-	if animation == "attack" and target:
+	if target and (animation == "attack_melee" or animation == "attack_ranged"):
 		flip_h =  target.global_position.x < global_position.x
 	else:
 		target = null

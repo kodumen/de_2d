@@ -79,6 +79,8 @@ player_primary={
 
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Enemy"
+2d_physics/layer_4="Zombie"
+2d_physics/layer_5="Imp"
 2d_physics/layer_11="AttackZone"
 2d_physics/layer_18="Wall"
 2d_physics/layer_19="EnemyHitBox"

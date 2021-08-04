@@ -7,14 +7,16 @@ class_name Enemy
 enum STATE {
 	IDLE,
 	MOVING,
-	ATTACKING,
+	ATTACK_MELEE,
+	ATTACK_RANGED,
 	DEAD
 }
 
 export(int) var armor = 0
 export(int) var health = 100
 export(int) var speed = 100
-export(int) var attack = 20
+export(int) var attack_melee = 20
+export(int) var attack_ranged = 20
 export(bool) var target_player = true
 export(NodePath) var target_path
 export(NodePath) var nav_2d_path
@@ -39,7 +41,8 @@ var path_line:Line2D
 signal state_idle
 signal state_moving(velocity)
 # warning-ignore:unused_signal
-signal state_attacking(target)
+signal state_attack_melee(target, attack)
+signal state_attack_ranged(target, attack)
 signal state_dead
 signal hit(damage)
 
@@ -65,7 +68,8 @@ func _ready():
 		var listeners = {
 			"state_idle": "_on_Enemy_state_idle",
 			"state_moving": "_on_Enemy_state_moving",
-			"state_attacking": "_on_Enemy_state_attacking",
+			"state_attack_melee": "_on_Enemy_state_attack_melee",
+			"state_attack_ranged": "_on_Enemy_state_attack_ranged",
 			"state_dead": "_on_Enemy_state_dead",
 		}
 		for enemy_signal in listeners:
@@ -129,12 +133,15 @@ func set_target(value:Node2D):
 
 func set_state(value:int):
 	state = value
-	if state == STATE.IDLE:
-		emit_signal("state_idle")
-	elif state == STATE.DEAD:
-		emit_signal("state_dead")
-	elif state == STATE.ATTACKING:
-		emit_signal("state_attacking", target)
+	match(state):
+		STATE.IDLE:
+			emit_signal("state_idle")
+		STATE.DEAD:
+			emit_signal("state_dead")
+		STATE.ATTACK_MELEE:
+			emit_signal("state_attack_melee", target, attack_melee)
+		STATE.ATTACK_RANGED:
+			emit_signal("state_attack_ranged", target, attack_ranged)
 
 
 # Find the path to the target position and return the nearest stop.
@@ -180,3 +187,4 @@ func hit(damage):
 func _on_Enemy_state_dead():
 	movement_collider.set_deferred("disabled", true)
 	hit_box.disabled(true)
+	

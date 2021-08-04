@@ -11,12 +11,11 @@ func _enemy_ready():
 	
 
 func _on_AttackZone_body_entered(body: Node2D):
-	if (body == target):
+	if body == target:
 		print_debug(name + " attacks!")
-		set_state(STATE.ATTACKING)
-		emit_signal("state_attacking", body)
+		set_state(STATE.ATTACK_MELEE)
 
 func _on_AttackZone_body_exited(body):
-	if (body == target):
+	if body == target:
 		print_debug(name + " stops attacking!")
 		state = STATE.MOVING
