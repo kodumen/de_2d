@@ -4,6 +4,8 @@ extends KinematicBody2D
 class_name Enemy
 
 
+const ENEMY_GROUP = "Enemy"
+
 enum STATE {
 	IDLE,
 	MOVING,
@@ -92,6 +94,8 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	connect("state_dead", self, "_on_Enemy_state_dead")
 		
+	add_to_group(ENEMY_GROUP)
+		
 	# Should we add another ready hook (e.g. _enemy_ready_final())?
 
 
@@ -101,7 +105,7 @@ func _enemy_ready():
 	pass
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if state != STATE.MOVING or target == null or nav_2d == null:
 		return
 		
@@ -109,7 +113,7 @@ func _physics_process(delta):
 	
 	var velocity = Vector2()
 	velocity = position.direction_to(nearest_stop)
-	velocity *= speed * delta
+	velocity *= speed
 	
 	if velocity.length() > 0:
 		emit_signal("state_moving", velocity)
@@ -117,7 +121,7 @@ func _physics_process(delta):
 		emit_signal("state_idle")
 	
 	# warning-ignore:return_value_discarded
-	move_and_collide(velocity)
+	move_and_slide(velocity)
 
 
 func set_target(value:Node2D):
