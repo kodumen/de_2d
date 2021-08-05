@@ -5,7 +5,7 @@
 [ext_resource path="res://common/Fireball/fireball-3.png" type="Texture" id=3]
 [ext_resource path="res://common/Fireball/Fireball.gd" type="Script" id=4]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
@@ -13,21 +13,20 @@ animations = [ {
 "speed": 8.0
 } ]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=2]
 radius = 29.2456
 
 [node name="Fireball" type="Area2D"]
 collision_layer = 524288
-collision_mask = 393217
+collision_mask = 131073
 script = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 2 )
-frame = 2
+frames = SubResource( 1 )
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [connection signal="area_entered" from="." to="." method="_on_Fireball_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_Fireball_body_entered"]
