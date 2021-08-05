@@ -27,7 +27,7 @@ func _process(_delta):
 	animatedSprite.flip_h = get_local_mouse_position().x <= 0
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if (state == STATE.DEAD):
 		return
 	
@@ -45,7 +45,7 @@ func _physics_process(delta):
 		velocity.x = 1
 		
 	velocity = velocity.normalized()
-	velocity *= speed * delta
+	velocity *= speed
 	
 	if (velocity.length() > 0):
 		state = STATE.MOVING
@@ -55,7 +55,7 @@ func _physics_process(delta):
 		emit_signal("state_idle")
 	
 	# warning-ignore:return_value_discarded
-	move_and_collide(velocity)
+	move_and_slide(velocity)
 
 
 func hit(damage):

@@ -42,16 +42,6 @@ animations = [ {
 "name": "default",
 "speed": 2.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "move",
-"speed": 8.0
-}, {
-"frames": [ ExtResource( 9 ), ExtResource( 16 ), ExtResource( 10 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ) ],
-"loop": false,
-"name": "dead",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 31 ), ExtResource( 30 ), ExtResource( 32 ), ExtResource( 34 ), ExtResource( 33 ) ],
 "loop": true,
 "name": "attack_melee",
@@ -61,6 +51,16 @@ animations = [ {
 "loop": true,
 "name": "attack_ranged",
 "speed": 12.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 16 ), ExtResource( 10 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ) ],
+"loop": false,
+"name": "dead",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "move",
+"speed": 8.0
 } ]
 
 [sub_resource type="Curve" id=2]
@@ -81,7 +81,8 @@ radius = 100.0
 
 [node name="Imp" type="KinematicBody2D"]
 collision_layer = 18
-collision_mask = 17
+collision_mask = 131089
+collision/safe_margin = 50.0
 script = ExtResource( 7 )
 attack_melee = 25
 
