@@ -30,15 +30,15 @@ animations = [ {
 "name": "move_reversed",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 15 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 9 ) ],
-"loop": false,
-"name": "dead",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 7 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "move",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 9 ) ],
+"loop": false,
+"name": "dead",
+"speed": 5.0
 } ]
 
 [sub_resource type="CircleShape2D" id=2]

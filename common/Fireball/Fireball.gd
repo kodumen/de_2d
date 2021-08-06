@@ -5,11 +5,17 @@ export var speed = 900
 export var damage = 0
 
 
+onready var animated_sprite:AnimatedSprite = $AnimatedSprite
+
+
 # Who threw this fireball?
 var thrower:Node2D
 
 
 func _physics_process(delta):
+	if animated_sprite.animation == "death":
+		return
+	
 	var velocity = Vector2(speed, 0) * delta
 	velocity = velocity.rotated(global_rotation)
 	
@@ -27,7 +33,7 @@ func _on_Fireball_body_entered(body:Node2D):
 		else:
 			body.hit(damage, global_position)
 	
-	queue_free()
+	die()
 
 
 func _on_Fireball_area_entered(area:Node2D):
@@ -39,4 +45,13 @@ func _on_Fireball_area_entered(area:Node2D):
 	if area.has_method("hit"):
 		area.hit(damage, global_position)
 		
-	queue_free()
+	die()
+
+
+func die():
+	animated_sprite.play("death")
+
+
+func _on_AnimatedSprite_animation_finished():
+	if animated_sprite.animation == "death":
+		queue_free()
