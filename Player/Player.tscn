@@ -79,7 +79,6 @@ anims/shake = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
-frame = 1
 playing = true
 script = ExtResource( 8 )
 
@@ -98,3 +97,4 @@ position = Vector2( 30.7013, 4.00452 )
 [connection signal="state_dead" from="." to="AnimatedSprite" method="_on_Player_state_dead"]
 [connection signal="state_idle" from="." to="AnimatedSprite" method="_on_Player_state_idle"]
 [connection signal="state_motion" from="." to="AnimatedSprite" method="_on_Player_state_motion"]
+[connection signal="fire" from="Weapon" to="." method="_on_Weapon_fire"]

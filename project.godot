@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://common/HitEffect/HitEffectPlayer.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Player/Player.gd"
+}, {
 "base": "Node2D",
 "class": "Sightline",
 "language": "GDScript",
@@ -44,6 +49,7 @@ _global_script_class_icons={
 "HitBox": "",
 "HitEffect": "",
 "HitEffectPlayer": "",
+"Player": "",
 "Sightline": "",
 "Wall": ""
 }

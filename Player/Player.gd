@@ -1,5 +1,9 @@
 extends KinematicBody2D
 
+
+class_name Player
+
+
 enum STATE {
 	IDLE
 	MOVING
@@ -11,20 +15,23 @@ export var armor = 50
 
 export var speed = 50
 
-onready var animatedSprite = $AnimatedSprite
+onready var animated_sprite = $AnimatedSprite
+onready var weapon = $Weapon
 
 var state = STATE.IDLE
+var ammo setget , get_ammo
 
 signal state_motion(velocity)
 signal state_idle
-signal hit
 signal state_dead
+signal hit
+signal fire
 
 func _process(_delta):
 	if state == STATE.DEAD:
 		return
 
-	animatedSprite.flip_h = get_local_mouse_position().x <= 0
+	animated_sprite.flip_h = get_local_mouse_position().x <= 0
 
 
 func _physics_process(_delta):
@@ -72,3 +79,11 @@ func hit(damage):
 		print_debug("%s is dead!" % name)
 		state = STATE.DEAD
 		emit_signal("state_dead")
+		
+		
+func get_ammo() -> int:
+	return weapon.ammo
+
+
+func _on_Weapon_fire():
+	emit_signal("fire")

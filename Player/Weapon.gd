@@ -1,11 +1,19 @@
 extends Node2D
 
+
 onready var SHOTGUN = $Shotgun
 
-var activeWeapon
+
+var active_weapon:Node
+var ammo setget , get_ammo
+
+
+signal fire
+
 
 func _ready():
-	activeWeapon = SHOTGUN
+	active_weapon = SHOTGUN
+
 
 func _process(_delta):
 	if (! visible):
@@ -24,8 +32,15 @@ func _physics_process(_delta):
 		return
 	
 	if (Input.is_action_just_pressed("player_primary")):
-		activeWeapon.fire()
+		active_weapon.fire()
+		emit_signal("fire")
 
 
 func _on_Player_state_dead():
 	visible = false
+	
+	
+func get_ammo() -> int:
+	assert("ammo" in active_weapon)
+	return active_weapon.ammo
+	

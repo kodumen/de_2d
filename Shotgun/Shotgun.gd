@@ -2,6 +2,8 @@ extends AnimatedSprite
 
 
 export(int) var damage = 50
+export(int) var max_ammo = 8
+export(int) var ammo = 8
 export(PackedScene) var trail
 
 var world:Node2D
@@ -18,8 +20,10 @@ func _ready():
 
 
 func fire():
-	if (! can_fire):
+	if ammo == 0 or ! can_fire:
 		return
+
+	ammo -= 1
 
 	play("fire")
 	
