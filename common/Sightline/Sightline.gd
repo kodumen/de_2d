@@ -18,6 +18,7 @@ func _ready():
 		ray.enabled = true
 		ray.collision_mask = view_mask
 		ray.cast_to = Vector2(sight_range, 0)
+		ray.collide_with_bodies = true
 		
 		add_child(ray)
 		

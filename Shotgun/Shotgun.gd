@@ -5,7 +5,7 @@ export(int) var damage = 50
 export(PackedScene) var trail
 
 var world:Node2D
-var rayCasts:Array
+var ray_casts:Array
 var can_fire = true
 
 
@@ -14,7 +14,7 @@ func _ready():
 		
 	for child in get_children():
 		if (child is RayCast2D):
-			rayCasts.append(child)
+			ray_casts.append(child)
 
 
 func fire():
@@ -23,7 +23,7 @@ func fire():
 
 	play("fire")
 	
-	for rayCast in rayCasts:
+	for rayCast in ray_casts:
 		create_trail(rayCast)
 		check_hit(rayCast)
 		
@@ -36,16 +36,16 @@ func create_trail(rayCast: RayCast2D):
 	trail_node.global_transform = rayCast.global_transform
 
 
-func check_hit(rayCast: RayCast2D):
-	var collider = rayCast.get_collider()
+func check_hit(ray_cast: RayCast2D):
+	var collider = ray_cast.get_collider()
 	if (collider):
-		print_debug(rayCast.name + " hit " + collider.name)
+		print_debug(ray_cast.name + " hit " + collider.name)
 		if (collider.has_method("hit")):
-			var ray_damage = ceil(damage / floor(len(rayCasts)))
-			collider.hit(ray_damage, rayCast.get_collision_point())
-			print_debug(rayCast.name + " dealt " + str(ray_damage) + " DMG!")
+			var ray_damage = ceil(damage / floor(len(ray_casts)))
+			collider.hit(ray_damage, ray_cast.get_collision_point())
+			print_debug(ray_cast.name + " dealt " + str(ray_damage) + " DMG!")
 	else:
-		print_debug(rayCast.name + " did not hit anything")
+		print_debug(ray_cast.name + " did not hit anything")
 
 
 func _on_Shotgun_animation_finished():

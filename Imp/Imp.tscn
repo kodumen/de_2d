@@ -42,15 +42,15 @@ animations = [ {
 "name": "default",
 "speed": 2.0
 }, {
-"frames": [ ExtResource( 22 ), ExtResource( 21 ), ExtResource( 26 ), ExtResource( 23 ), ExtResource( 19 ), ExtResource( 18 ), ExtResource( 24 ), ExtResource( 20 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 17 ) ],
-"loop": true,
-"name": "attack_ranged",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 31 ), ExtResource( 30 ), ExtResource( 32 ), ExtResource( 34 ), ExtResource( 33 ) ],
 "loop": true,
 "name": "attack_melee",
 "speed": 8.0
+}, {
+"frames": [ ExtResource( 22 ), ExtResource( 21 ), ExtResource( 26 ), ExtResource( 23 ), ExtResource( 19 ), ExtResource( 18 ), ExtResource( 24 ), ExtResource( 20 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "attack_ranged",
+"speed": 12.0
 }, {
 "frames": [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
@@ -89,6 +89,7 @@ attack_melee = 25
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -13 )
 frames = SubResource( 1 )
+frame = 1
 playing = true
 script = ExtResource( 8 )
 

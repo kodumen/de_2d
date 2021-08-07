@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://common/HitEffect/HitEffect.gd" type="Script" id=1]
+[ext_resource path="res://common/Fireball/fireball_death-3.png" type="Texture" id=2]
+[ext_resource path="res://common/Fireball/fireball_death-4.png" type="Texture" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "default",
+"speed": 8.0
+} ]
+
+[node name="Dust" type="AnimatedSprite"]
+modulate = Color( 0.909804, 0.635294, 0.694118, 1 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 1 )
+script = ExtResource( 1 )
+randomize_rotation = true

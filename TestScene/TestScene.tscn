@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Zombie/Zombie.tscn" type="PackedScene" id=2]
 [ext_resource path="res://HUD/HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://TestScene/test_map.png" type="Texture" id=4]
 [ext_resource path="res://Imp/Imp.tscn" type="PackedScene" id=5]
+[ext_resource path="res://common/Wall/Wall.gd" type="Script" id=6]
+[ext_resource path="res://common/HitEffect/HitEffectPlayer.gd" type="Script" id=7]
+[ext_resource path="res://common/Dust/Dust.tscn" type="PackedScene" id=8]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 719.692, 495.194, 819.665, 94.8611, 831.665, 646.861, 682.146, 681.446, 704.543, 76.1558, 837.665, -117.139, 609.406, -4.71033, 460.34, -259.431, 440.862, -554.598, 559.228, -544.109, 849.665, 846.861, 577.665, 862.861, 594.594, 726.344, 327.448, 730.834, 56.8011, 846.694, -395.418, 766.753, -132.335, 710.861, 145.609, 670.221, -210.167, 866.717, -626.637, 842.69, -623.494, -505.337, -485.494, -521.337, -488.335, -297.139, -844.335, 142.861, 214.618, -699.933, 223.607, -117.092, -223.494, -157.337, -231.494, -523.337, -263.494, -757.337, -604.335, 726.861, -850.335, 846.861, -842.335, 568.861, -662.335, 676.861, 679.665, -889.139, 879.665, -873.139, 861.665, -681.139, 667.106, -705.927, 587.696, -795.825, 479.665, -887.139, 264.062, -806.313, -544.335, -857.139, -401.494, -769.337, -688.335, -717.139, -850.335, -859.139, -709.494, -571.337, -676.335, 138.861, -461.494, -103.337, -624.335, 102.861, 643.133, -598.048, 440.862, -121.587, 452.431, 66.6421, 328.489, -49.668, 271.671, 287.835, 111.935, 580.424, -108.067, 575.935, 152.344, 456.954, -702.335, 582.861, -700.335, 396.861, -706.335, 214.861, -411.132, 192.053, -339.494, -61.3365, -191.13, 412.055 )
@@ -19,25 +22,30 @@ outlines = [ PoolVector2Array( -850.335, -859.139, -544.335, -857.139, 479.665, 
 position = Vector2( 0, -1.68182 )
 texture = ExtResource( 4 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Map"]
+[node name="Wall" type="StaticBody2D" parent="Map"]
 collision_layer = 131072
-collision_mask = 3
+collision_mask = 524291
+script = ExtResource( 6 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/StaticBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Wall"]
 polygon = PoolVector2Array( 180.956, 603.606, 186.002, 536.334, 288.591, 391.7, 424.816, 231.929, 534.133, 107.477, 594.677, 73.8409, 628.313, 90.6588, 636.722, 233.611, 640.086, 398.427, 640.086, 497.653, 628.313, 590.151, 596.359, 638.923, 498.815, 647.332, 374.363, 655.741, 267.105, 649.979, 200.509, 645.222 )
 
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Map/StaticBody2D"]
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Map/Wall"]
 polygon = PoolVector2Array( -627.014, 148.88, -456.155, 285.034, -302.189, 451.46, -197.063, 576.186, -182.809, 615.385, -191.718, 661.712, -325.352, 683.094, -428.697, 692.003, -576.586, 683.094, -626.476, 649.24, -653.203, 319.607, -651.421, 202.009 )
 
-[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Map/StaticBody2D"]
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Map/Wall"]
 polygon = PoolVector2Array( -640.427, -614.369, -642.546, -675.818, -540.838, -687.472, -428.535, -675.818, -373.443, -685.353, -323.648, -681.115, -311.994, -371.752, -308.816, -186.346, -332.124, -163.038, -372.383, -154.562, -396.751, -160.919, -405.227, -316.66, -421.119, -441.676, -421.119, -562.455, -426.416, -586.823, -466.676, -597.417, -547.195, -590.001, -604.406, -581.525, -635.13, -586.823 )
 
-[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Map/StaticBody2D"]
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Map/Wall"]
 polygon = PoolVector2Array( 286.161, -179.843, 289.729, -311.845, 282.594, -567.524, 281.404, -684.067, 302.81, -729.256, 430.055, -734.013, 582.274, -725.689, 609.626, -703.094, 594.166, -644.823, 565.625, -610.336, 380.109, -610.336, 377.73, -433.144, 383.676, -311.845, 363.46, -171.518, 327.784, -153.68, 299.243, -158.437 )
 
-[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="Map/StaticBody2D"]
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="Map/Wall"]
 build_mode = 1
 polygon = PoolVector2Array( -911.132, -920.564, -243.624, -937.535, 496.01, -938.949, 935.831, -936.121, 910.375, -506.2, 879.262, 22.7163, 901.89, 640.728, 916.032, 893.872, 611.976, 909.428, 64.675, 876.901, -208.268, 896.7, -621.219, 871.245, -904.061, 908.014, -887.091, 548.804, -904.061, 138.682, -908.303, -441.146 )
+
+[node name="HitEffectPlayer" type="Node2D" parent="Map/Wall"]
+script = ExtResource( 7 )
+hit_effect = ExtResource( 8 )
 
 [node name="Navigation2D" type="Navigation2D" parent="Map" groups=[
 "Navigation",
@@ -54,6 +62,7 @@ navpoly = SubResource( 1 )
 "Player",
 ] instance=ExtResource( 1 )]
 position = Vector2( 556.885, -372.937 )
+health = 10000
 
 [node name="Imp" parent="World" groups=[
 "Enemy",

@@ -19,15 +19,33 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://common/HitBox.gd"
 }, {
+"base": "AnimatedSprite",
+"class": "HitEffect",
+"language": "GDScript",
+"path": "res://common/HitEffect/HitEffect.gd"
+}, {
+"base": "Node2D",
+"class": "HitEffectPlayer",
+"language": "GDScript",
+"path": "res://common/HitEffect/HitEffectPlayer.gd"
+}, {
 "base": "Node2D",
 "class": "Sightline",
 "language": "GDScript",
 "path": "res://common/Sightline/Sightline.gd"
+}, {
+"base": "StaticBody2D",
+"class": "Wall",
+"language": "GDScript",
+"path": "res://common/Wall/Wall.gd"
 } ]
 _global_script_class_icons={
 "Enemy": "",
 "HitBox": "",
-"Sightline": ""
+"HitEffect": "",
+"HitEffectPlayer": "",
+"Sightline": "",
+"Wall": ""
 }
 
 [application]

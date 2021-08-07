@@ -4,7 +4,7 @@ extends Area2D
 class_name HitBox
 
 
-export(PackedScene) var hit_effect
+onready var hit_effect_player:HitEffectPlayer = $HitEffectPlayer
 
 
 var collision_shape:CollisionShape2D
@@ -18,14 +18,8 @@ func _ready():
 
 
 func hit(damage, hit_position):
-	create_hit_effect(hit_position)
+	hit_effect_player.play(hit_position)
 	emit_signal("hit", damage)
-
-
-func create_hit_effect(hit_position):
-	var effect = hit_effect.instance()
-	add_child(effect)
-	effect.global_position = hit_position
 
 
 func get_collision_shape():

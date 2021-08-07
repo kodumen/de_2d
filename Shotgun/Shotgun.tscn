@@ -25,36 +25,33 @@ animations = [ {
 } ]
 
 [node name="Shotgun" type="AnimatedSprite"]
-position = Vector2( 0.8909, -1.7818 )
+position = Vector2( 1.76776, -1.76777 )
 frames = SubResource( 1 )
 playing = true
 script = ExtResource( 3 )
 trail = ExtResource( 9 )
 
 [node name="RayCast2D1" type="RayCast2D" parent="."]
-position = Vector2( 57.6848, -4.49492 )
+position = Vector2( 14.4957, -4.24264 )
 rotation = -0.0872665
 enabled = true
 cast_to = Vector2( 400, 0 )
 collision_mask = 393216
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="RayCast2D2" type="RayCast2D" parent="."]
-position = Vector2( 57.6848, -4.49492 )
+position = Vector2( 14.4957, -4.24264 )
 enabled = true
 cast_to = Vector2( 400, 0 )
 collision_mask = 393216
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="RayCast2D3" type="RayCast2D" parent="."]
-position = Vector2( 57.6848, -4.49492 )
+position = Vector2( 14.4957, -4.24264 )
 rotation = 0.0872665
 enabled = true
 cast_to = Vector2( 400, 0 )
 collision_mask = 393216
 collide_with_areas = true
-collide_with_bodies = false
 
 [connection signal="animation_finished" from="." to="." method="_on_Shotgun_animation_finished"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://common/Blood/Blood.gd" type="Script" id=1]
+[ext_resource path="res://common/HitEffect/HitEffect.gd" type="Script" id=1]
 [ext_resource path="res://common/Blood/blood-2.png" type="Texture" id=2]
 [ext_resource path="res://common/Blood/blood-1.png" type="Texture" id=3]
 [ext_resource path="res://common/Blood/blood-3.png" type="Texture" id=4]
@@ -17,5 +17,3 @@ animations = [ {
 [node name="BloodEffect" type="AnimatedSprite"]
 frames = SubResource( 1 )
 script = ExtResource( 1 )
-
-[connection signal="animation_finished" from="." to="." method="_on_BloodEffect_animation_finished"]
