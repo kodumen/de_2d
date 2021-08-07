@@ -89,11 +89,11 @@ __meta__ = {
 }
 
 [node name="CenterContainer" type="CenterContainer" parent="NoAmmo"]
-margin_right = 96.0
+margin_right = 69.0
 margin_bottom = 40.0
 
 [node name="Label" type="Label" parent="NoAmmo/CenterContainer"]
 margin_top = 13.0
-margin_right = 96.0
+margin_right = 69.0
 margin_bottom = 27.0
 text = "NO AMMO"

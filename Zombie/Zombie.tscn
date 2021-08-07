@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Zombie/zombie_default-1.png" type="Texture" id=1]
 [ext_resource path="res://Zombie/Zombie.gd" type="Script" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://Zombie/zombie_dead-6.png" type="Texture" id=18]
 [ext_resource path="res://Zombie/AttackZone.gd" type="Script" id=19]
 [ext_resource path="res://common/HitBox.tscn" type="PackedScene" id=20]
+[ext_resource path="res://common/ItemDrop/ItemDrop.gd" type="Script" id=21]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 30.0
@@ -95,6 +96,9 @@ default_color = Color( 0.0235294, 1, 0.0392157, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource( 5 )
+
+[node name="ItemDrop" type="Node" parent="."]
+script = ExtResource( 21 )
 
 [connection signal="state_attack_melee" from="." to="AttackTimer" method="_on_Zombie_state_attack_melee"]
 [connection signal="state_dead" from="." to="AttackZone" method="_on_Zombie_state_dead"]

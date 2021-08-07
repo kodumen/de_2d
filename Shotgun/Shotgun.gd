@@ -56,3 +56,7 @@ func _on_Shotgun_animation_finished():
 	if (animation == "fire"):
 		play("default")
 		can_fire = true
+
+
+func is_max_ammo() -> bool:
+	return ammo >= max_ammo

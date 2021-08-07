@@ -19,9 +19,14 @@ func _ready():
 		
 	if player:
 		_update_hud()
+		# warning-ignore:return_value_discarded
 		player.connect("state_dead", self, "_on_Player_state_dead")
+		# warning-ignore:return_value_discarded
 		player.connect("hit", self, "_on_Player_hit")
+		# warning-ignore:return_value_discarded
 		player.connect("fire", self, "_on_Player_fire")
+		# warning-ignore:return_value_discarded
+		player.connect("item_pickup", self, "_on_Player_item_pickup")
 
 
 func _on_Player_hit():
@@ -29,6 +34,10 @@ func _on_Player_hit():
 	
 	
 func _on_Player_fire():
+	_update_hud()
+	
+	
+func _on_Player_item_pickup(_item):
 	_update_hud()
 
 

@@ -62,90 +62,67 @@ navpoly = SubResource( 1 )
 "Player",
 ] instance=ExtResource( 1 )]
 position = Vector2( 556.885, -372.937 )
-health = 10000
 
-[node name="Imp" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 5 )]
-position = Vector2( 70.7108, -322.441 )
+[node name="Zombie" parent="World" instance=ExtResource( 2 )]
 
-[node name="Imp2" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 5 )]
-position = Vector2( 777.818, 398.809 )
+[node name="Zombie2" parent="World" instance=ExtResource( 2 )]
+position = Vector2( -366.276, 123.677 )
 
-[node name="Imp3" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 5 )]
-position = Vector2( -347.897, 79.1961 )
+[node name="Zombie3" parent="World" instance=ExtResource( 2 )]
+position = Vector2( -556.549, -366.276 )
 
-[node name="Zombie" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 2 )]
+[node name="Zombie4" parent="World" instance=ExtResource( 2 )]
+position = Vector2( -780.12, -551.792 )
 
-[node name="Zombie2" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 2 )]
-position = Vector2( -509.594, -762.609 )
+[node name="Zombie5" parent="World" instance=ExtResource( 2 )]
+position = Vector2( -190.273, 547.035 )
 
-[node name="Zombie3" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 2 )]
-position = Vector2( 759.046, -3.5636 )
+[node name="Zombie6" parent="World" instance=ExtResource( 2 )]
+position = Vector2( 156.975, 209.3 )
 
-[node name="Zombie4" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 2 )]
-position = Vector2( -24.9453, 780.427 )
+[node name="Zombie7" parent="World" instance=ExtResource( 2 )]
+position = Vector2( 356.762, 76.1091 )
 
-[node name="Zombie5" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 2 )]
-position = Vector2( -762.609, 110.472 )
+[node name="Zombie8" parent="World" instance=ExtResource( 2 )]
+position = Vector2( 356.762, 76.1091 )
 
-[node name="Zombie6" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 2 )]
-position = Vector2( 598.684, 709.156 )
+[node name="Zombie9" parent="World" instance=ExtResource( 2 )]
+position = Vector2( 723.038, 756.336 )
 
-[node name="Zombie7" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 2 )]
-position = Vector2( -146.108, -438.322 )
+[node name="Imp" parent="World" instance=ExtResource( 5 )]
 
-[node name="Zombie8" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 2 )]
-position = Vector2( 124.726, -645.01 )
+[node name="Imp2" parent="World" instance=ExtResource( 5 )]
+position = Vector2( -589.847, -76.1093 )
 
-[node name="Zombie9" parent="World" groups=[
-"Enemy",
-] instance=ExtResource( 2 )]
-position = Vector2( 153.234, 253.015 )
+[node name="Imp3" parent="World" instance=ExtResource( 5 )]
+position = Vector2( -209.3, 242.598 )
 
 [node name="Imp4" parent="World" instance=ExtResource( 5 )]
-position = Vector2( -707.201, -179.797 )
+position = Vector2( -4.75684, 580.333 )
 
 [node name="Imp5" parent="World" instance=ExtResource( 5 )]
-position = Vector2( 764.137, -758.143 )
+position = Vector2( -176.003, 770.606 )
 
 [node name="Imp6" parent="World" instance=ExtResource( 5 )]
-position = Vector2( -752.15, -731.174 )
+position = Vector2( 90.3796, 765.849 )
 
 [node name="Imp7" parent="World" instance=ExtResource( 5 )]
-position = Vector2( -741.603, 626.105 )
+position = Vector2( 71.3523, -704.01 )
 
 [node name="Imp8" parent="World" instance=ExtResource( 5 )]
-position = Vector2( -352.796, 787.555 )
+position = Vector2( -118.921, -461.412 )
 
 [node name="Imp9" parent="World" instance=ExtResource( 5 )]
-position = Vector2( 438.322, 787.554 )
+position = Vector2( -742.065, -304.437 )
 
 [node name="Imp10" parent="World" instance=ExtResource( 5 )]
-position = Vector2( 35.6359, 523.849 )
+position = Vector2( -761.092, 727.795 )
 
 [node name="Imp11" parent="World" instance=ExtResource( 5 )]
-position = Vector2( 741.228, 741.228 )
+position = Vector2( -770.606, 513.737 )
+
+[node name="Imp12" parent="World" instance=ExtResource( 5 )]
+position = Vector2( 461.412, 784.877 )
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
 player_path = NodePath("../World/Player")

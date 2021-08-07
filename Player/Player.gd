@@ -11,6 +11,7 @@ enum STATE {
 }
 
 export var health = 100
+export var max_health = 100
 export var armor = 50
 
 export var speed = 50
@@ -26,6 +27,8 @@ signal state_idle
 signal state_dead
 signal hit
 signal fire
+# warning-ignore:unused_signal
+signal item_pickup(item)
 
 func _process(_delta):
 	if state == STATE.DEAD:
@@ -85,5 +88,13 @@ func get_ammo() -> int:
 	return weapon.ammo
 
 
+func get_weapon(weapon_name:String) -> Node2D:
+	return weapon.get_node(weapon_name)
+
+
 func _on_Weapon_fire():
 	emit_signal("fire")
+
+
+func is_max_health() -> bool:
+	return health >= max_health

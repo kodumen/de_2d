@@ -43,4 +43,3 @@ func _on_Player_state_dead():
 func get_ammo() -> int:
 	assert("ammo" in active_weapon)
 	return active_weapon.ammo
-	

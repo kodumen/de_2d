@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://common/Enemy/Enemy.gd"
 }, {
+"base": "Item",
+"class": "HealthPack",
+"language": "GDScript",
+"path": "res://HealthPack/HealthPack.gd"
+}, {
 "base": "Area2D",
 "class": "HitBox",
 "language": "GDScript",
@@ -29,10 +34,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://common/HitEffect/HitEffectPlayer.gd"
 }, {
+"base": "Area2D",
+"class": "Item",
+"language": "GDScript",
+"path": "res://common/Item/Item.gd"
+}, {
+"base": "Node",
+"class": "ItemDrop",
+"language": "GDScript",
+"path": "res://common/ItemDrop/ItemDrop.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Player/Player.gd"
+}, {
+"base": "Item",
+"class": "ShotgunAmmoPack",
+"language": "GDScript",
+"path": "res://AmmoPack/ShotgunAmmoPack.gd"
 }, {
 "base": "Node2D",
 "class": "Sightline",
@@ -46,10 +66,14 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Enemy": "",
+"HealthPack": "",
 "HitBox": "",
 "HitEffect": "",
 "HitEffectPlayer": "",
+"Item": "",
+"ItemDrop": "",
 "Player": "",
+"ShotgunAmmoPack": "",
 "Sightline": "",
 "Wall": ""
 }
@@ -106,6 +130,8 @@ player_primary={
 2d_physics/layer_4="Zombie"
 2d_physics/layer_5="Imp"
 2d_physics/layer_11="AttackZone"
+2d_physics/layer_12="PickupZone"
+2d_physics/layer_16="Item"
 2d_physics/layer_18="Wall"
 2d_physics/layer_19="EnemyHitBox"
 2d_physics/layer_20="Projectile"
