@@ -4,7 +4,7 @@ extends Node2D
 onready var SHOTGUN = $Shotgun
 
 
-var active_weapon:Node
+var active_weapon:BaseWeapon
 var ammo setget , get_ammo
 
 
@@ -16,22 +16,22 @@ func _ready():
 
 
 func _process(_delta):
-	if (! visible):
+	if ! visible:
 		return
 
 	look_at(get_global_mouse_position())
 	
-	if (get_global_mouse_position().x < global_position.x):
+	if get_global_mouse_position().x < global_position.x:
 		scale.y = -abs(scale.y)
 	else:
 		scale.y = abs(scale.y)
 		
 		
 func _physics_process(_delta):
-	if (! visible):
+	if ! visible:
 		return
 	
-	if (Input.is_action_just_pressed("player_primary")):
+	if active_weapon.can_fire() and active_weapon.check_input():
 		active_weapon.fire()
 		emit_signal("fire")
 

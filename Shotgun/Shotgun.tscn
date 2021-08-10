@@ -53,5 +53,3 @@ enabled = true
 cast_to = Vector2( 400, 0 )
 collision_mask = 393216
 collide_with_areas = true
-
-[connection signal="animation_finished" from="." to="." method="_on_Shotgun_animation_finished"]
