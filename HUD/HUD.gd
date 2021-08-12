@@ -27,6 +27,7 @@ func _ready():
 		player.connect("fire", self, "_on_Player_fire")
 		# warning-ignore:return_value_discarded
 		player.connect("item_pickup", self, "_on_Player_item_pickup")
+		player.connect("ammo_count_changed", self, "_on_Player_ammo_count_changed")
 
 
 func _on_Player_hit():
@@ -39,12 +40,15 @@ func _on_Player_fire():
 	
 func _on_Player_item_pickup(_item):
 	_update_hud()
+	
+func _on_Player_ammo_count_changed(_amount):
+	_update_hud()
 
 
 func _update_hud():
-	health_label.text = "Health: " + str(player.health)
-	armor_label.text = "Armor: " + str(player.armor)
-	ammo_label.text = "Ammo: " + str(player.ammo)
+	health_label.text = "Health: %d" % player.health
+	armor_label.text = "Armor: %d" % player.armor
+	ammo_label.text = "Ammo: %d" % player.ammo
 	
 	no_ammo.visible = player.ammo == 0
 

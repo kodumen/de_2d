@@ -1,7 +1,7 @@
-extends KinematicBody2D
-
-
 class_name Player
+
+
+extends KinematicBody2D
 
 
 enum STATE {
@@ -29,6 +29,7 @@ signal hit
 signal fire
 # warning-ignore:unused_signal
 signal item_pickup(item)
+signal ammo_count_changed(count)
 
 func _process(_delta):
 	if state == STATE.DEAD:
@@ -98,3 +99,7 @@ func _on_Weapon_fire():
 
 func is_max_health() -> bool:
 	return health >= max_health
+
+
+func _on_Weapon_ammo_count_changed(amount):
+	emit_signal("ammo_count_changed", amount)

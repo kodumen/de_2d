@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://common/ItemDrop/ItemDrop.gd"
 }, {
+"base": "BaseWeapon",
+"class": "Pistol",
+"language": "GDScript",
+"path": "res://Pistol/Pistol.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
@@ -83,6 +88,7 @@ _global_script_class_icons={
 "HitEffectPlayer": "",
 "Item": "",
 "ItemDrop": "",
+"Pistol": "",
 "Player": "",
 "Shotgun": "",
 "ShotgunAmmoPack": "",

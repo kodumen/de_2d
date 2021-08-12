@@ -29,7 +29,7 @@ position = Vector2( 1.76776, -1.76777 )
 frames = SubResource( 1 )
 playing = true
 script = ExtResource( 3 )
-trail = ExtResource( 9 )
+hitscan_trail = ExtResource( 9 )
 
 [node name="RayCast2D1" type="RayCast2D" parent="."]
 position = Vector2( 14.4957, -4.24264 )

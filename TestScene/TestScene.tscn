@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Zombie/Zombie.tscn" type="PackedScene" id=2]
 [ext_resource path="res://HUD/HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://TestScene/test_map.png" type="Texture" id=4]
 [ext_resource path="res://common/Wall/Wall.gd" type="Script" id=6]
@@ -60,6 +61,21 @@ navpoly = SubResource( 1 )
 "Player",
 ] instance=ExtResource( 1 )]
 position = Vector2( -65.1027, -37.2212 )
+
+[node name="Zombie" parent="World" instance=ExtResource( 2 )]
+position = Vector2( 376.075, 4.49493 )
+
+[node name="Zombie2" parent="World" instance=ExtResource( 2 )]
+position = Vector2( 119.865, -238.231 )
+
+[node name="Zombie3" parent="World" instance=ExtResource( 2 )]
+position = Vector2( -376.075, 44.9492 )
+
+[node name="Zombie4" parent="World" instance=ExtResource( 2 )]
+position = Vector2( -77.912, 200.773 )
+
+[node name="Zombie5" parent="World" instance=ExtResource( 2 )]
+position = Vector2( -7.49164, 406.041 )
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
 player_path = NodePath("../World/Player")

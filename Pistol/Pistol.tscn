@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Pistol/pistol_fire-1.png" type="Texture" id=1]
+[ext_resource path="res://Pistol/pistol_fire-2.png" type="Texture" id=2]
+[ext_resource path="res://Pistol/Pistol.gd" type="Script" id=3]
+[ext_resource path="res://Shotgun/ShotgunTrail.tscn" type="PackedScene" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": false,
+"name": "default",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "fire",
+"speed": 5.0
+} ]
+
+[node name="Pistol" type="AnimatedSprite"]
+position = Vector2( 18.0203, -2.00223 )
+frames = SubResource( 1 )
+playing = true
+script = ExtResource( 3 )
+damage = 10
+max_ammo = 5
+ammo = 5
+hitscan_trail = ExtResource( 4 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( -15.3506, 2.00226 )
+enabled = true
+cast_to = Vector2( 400, 0 )
+collision_mask = 393216
+collide_with_areas = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

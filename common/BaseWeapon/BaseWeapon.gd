@@ -1,12 +1,16 @@
-extends AnimatedSprite
-
-
+# Base classs for projectile and hitscan weapons.
+# This class contains functions and properties useful for
+# hitscan, projectile, or both.
 class_name BaseWeapon
+
+
+extends AnimatedSprite
 
 
 export(int) var damage = 50
 export(int) var max_ammo = 8
-export(int) var ammo = 8
+export(int) var ammo = 8 setget set_ammo
+export(PackedScene) var hitscan_trail
 
 
 # A reference to the world for a better DX.
@@ -14,12 +18,21 @@ onready var world:Node2D = DependencyInjector.world
 
 
 var is_idle = true
+var ray_casts:Array = []
+
+
+signal ammo_count_changed(count)
 
 
 func _ready():
 	# warning-ignore:return_value_discarded
 	connect("animation_finished", self, "_on_animation_finished")
-
+	
+	# In case the weapon use any rays (as with hitscan weapons),
+	# collect them for easy access.
+	for child in get_children():
+		if child is RayCast2D:
+			ray_casts.append(child)
 
 # Check whether the weapon is fired.
 # Override this depending on how the weapon should behave.
@@ -31,7 +44,7 @@ func check_fire() -> bool:
 # Override this depending on how the weapon should behave.
 # Make sure to call the parent fire() method.
 func fire():
-	ammo -= 1
+	set_ammo(ammo - 1)
 	play("fire")
 	is_idle = false
 
@@ -49,3 +62,31 @@ func _on_animation_finished():
 	if animation == "fire":
 		play("default")
 		is_idle = true
+		
+
+# Create a trail for hitscan weapons.
+# You are not required to use this.
+func create_trail(ray_cast:RayCast2D):
+	assert(hitscan_trail != null)
+	var trail_node:Node2D = hitscan_trail.instance()
+	world.add_child(trail_node)
+	trail_node.global_transform = ray_cast.global_transform
+
+
+# Scan for hits and deal damage.
+# You are not required to use this.
+func check_hit(ray_cast: RayCast2D):
+	var collider = ray_cast.get_collider()
+	if (collider):
+		print_debug(ray_cast.name + " hit " + collider.name)
+		if (collider.has_method("hit")):
+			var ray_damage = ceil(damage / floor(len(ray_casts)))
+			collider.hit(ray_damage, ray_cast.get_collision_point())
+			print_debug(ray_cast.name + " dealt " + str(ray_damage) + " DMG!")
+	else:
+		print_debug(ray_cast.name + " did not hit anything")
+
+
+func set_ammo(amount):
+	ammo = amount
+	emit_signal("ammo_count_changed", amount)
