@@ -11,6 +11,8 @@ export(int) var damage = 50
 export(int) var max_ammo = 8
 export(int) var ammo = 8 setget set_ammo
 export(PackedScene) var hitscan_trail
+# This property does not have a setter. Call set_next_weapon() instead.
+export(NodePath) var next_weapon_path
 
 
 # A reference to the world for a better DX.
@@ -19,6 +21,12 @@ onready var world:Node2D = DependencyInjector.world
 
 var is_idle = true
 var ray_casts:Array = []
+
+# Can't typehint the class here because of cyclic dependency.
+# I also don't want to inherit from another base class so
+# let's just forget it.
+var prev_weapon
+var next_weapon
 
 
 signal ammo_count_changed(count)
@@ -33,6 +41,10 @@ func _ready():
 	for child in get_children():
 		if child is RayCast2D:
 			ray_casts.append(child)
+			
+	if next_weapon_path:
+		set_next_weapon(get_node(next_weapon_path))
+	
 
 # Check whether the weapon is fired.
 # Override this depending on how the weapon should behave.
@@ -90,3 +102,14 @@ func check_hit(ray_cast: RayCast2D):
 func set_ammo(amount):
 	ammo = amount
 	emit_signal("ammo_count_changed", amount)
+	
+
+func set_next_weapon(weapon_node):
+	assert(weapon_node != null)	
+	# In the absence of typehinting, check if the properties
+	# for weapon switching are defined.
+	assert("prev_weapon" in weapon_node)
+	assert("next_weapon" in weapon_node)
+	
+	next_weapon = weapon_node
+	weapon_node.prev_weapon = self

@@ -99,6 +99,7 @@ position = Vector2( 30.7013, 4.00452 )
 
 [node name="Pistol" parent="Weapon" instance=ExtResource( 19 )]
 visible = false
+next_weapon_path = NodePath("../Shotgun")
 
 [node name="PickupZone" type="Area2D" parent="."]
 collision_layer = 2048

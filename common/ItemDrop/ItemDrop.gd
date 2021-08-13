@@ -43,7 +43,7 @@ func roll(chance:int, item_scene:PackedScene):
 		print_debug("Too bad.")
 	else:
 		print_debug("Spawning %s!" % item_scene.resource_path)
-		for i in range(item_count):
+		for _i in range(item_count):
 			var item = item_scene.instance()
 			get_parent().add_child(item)
 			item.global_position = get_parent().global_position

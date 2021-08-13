@@ -5,7 +5,7 @@ onready var shotgun:Shotgun = $Shotgun
 onready var pistol:Pistol = $Pistol
 
 
-var active_weapon:BaseWeapon
+var active_weapon:BaseWeapon setget set_active_weapon
 var ammo setget , get_ammo
 
 
@@ -14,8 +14,9 @@ signal ammo_count_changed(amount)
 
 
 func _ready():
-	active_weapon = pistol
+	active_weapon = shotgun
 	active_weapon.visible = true
+	# warning-ignore:return_value_discarded
 	active_weapon.connect(
 		"ammo_count_changed", 
 		self,
@@ -56,3 +57,12 @@ func get_ammo() -> int:
 	
 func _on_active_weapon_ammo_count_changed(amount):
 	emit_signal("ammo_count_changed", amount)
+	
+	if amount == 0 and active_weapon.prev_weapon:
+		set_active_weapon(active_weapon.prev_weapon)
+		
+
+func set_active_weapon(weapon_node:BaseWeapon):
+	active_weapon.visible = false
+	weapon_node.visible = true
+	active_weapon = weapon_node
