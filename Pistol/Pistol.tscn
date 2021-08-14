@@ -19,9 +19,9 @@ animations = [ {
 } ]
 
 [node name="Pistol" type="AnimatedSprite"]
-position = Vector2( 18.0203, -2.00223 )
 frames = SubResource( 1 )
 playing = true
+offset = Vector2( 20, 6 )
 script = ExtResource( 3 )
 damage = 10
 max_ammo = 5
@@ -29,7 +29,6 @@ ammo = 5
 hitscan_trail = ExtResource( 4 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2( -15.3506, 2.00226 )
 enabled = true
 cast_to = Vector2( 400, 0 )
 collision_mask = 393216
