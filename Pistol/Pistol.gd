@@ -16,11 +16,3 @@ func fire():
 	for ray_cast in ray_casts:
 		create_trail(ray_cast)
 		check_hit(ray_cast)
-		
-	if ammo == 0:
-		# Timer wait time can be configured in the Timer node.
-		timer.start()
-
-
-func _on_Timer_timeout():
-	set_ammo(max_ammo)

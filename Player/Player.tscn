@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Player/player_default-2.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
@@ -16,7 +16,6 @@
 [ext_resource path="res://Player/player_dead-3.png" type="Texture" id=14]
 [ext_resource path="res://Player/player_dead-1.png" type="Texture" id=15]
 [ext_resource path="res://Shotgun/Shotgun.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Player/Weapon.gd" type="Script" id=17]
 [ext_resource path="res://Player/Camera2D.gd" type="Script" id=18]
 [ext_resource path="res://Pistol/Pistol.tscn" type="PackedScene" id=19]
 
@@ -70,6 +69,9 @@ radius = 81.0108
 collision_mask = 2
 script = ExtResource( 2 )
 speed = 300
+shells = 8
+clips = 5
+active_weapon_path = NodePath("Shotgun")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -83,23 +85,12 @@ anims/shake = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
-frame = 1
 playing = true
 script = ExtResource( 8 )
 
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -0.15749 )
 shape = SubResource( 3 )
-
-[node name="Weapon" type="Node2D" parent="."]
-script = ExtResource( 17 )
-
-[node name="Shotgun" parent="Weapon" instance=ExtResource( 16 )]
-visible = false
-
-[node name="Pistol" parent="Weapon" instance=ExtResource( 19 )]
-visible = false
-next_weapon_path = NodePath("../Shotgun")
 
 [node name="PickupZone" type="Area2D" parent="."]
 collision_layer = 2048
@@ -108,10 +99,14 @@ collision_mask = 32768
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupZone"]
 shape = SubResource( 4 )
 
+[node name="Shotgun" parent="." instance=ExtResource( 16 )]
+visible = false
+
+[node name="Pistol" parent="." instance=ExtResource( 19 )]
+visible = false
+next_weapon_path = NodePath("../Shotgun")
+
 [connection signal="hit" from="." to="Camera2D" method="_on_Player_hit"]
-[connection signal="state_dead" from="." to="Weapon" method="_on_Player_state_dead"]
 [connection signal="state_dead" from="." to="AnimatedSprite" method="_on_Player_state_dead"]
 [connection signal="state_idle" from="." to="AnimatedSprite" method="_on_Player_state_idle"]
 [connection signal="state_motion" from="." to="AnimatedSprite" method="_on_Player_state_motion"]
-[connection signal="ammo_count_changed" from="Weapon" to="." method="_on_Weapon_ammo_count_changed"]
-[connection signal="fire" from="Weapon" to="." method="_on_Weapon_fire"]

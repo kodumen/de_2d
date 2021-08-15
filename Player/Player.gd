@@ -10,63 +10,100 @@ enum STATE {
 	DEAD
 }
 
-export var health = 100
-export var max_health = 100
-export var armor = 50
 
-export var speed = 50
+export(int) var health = 100
+export(int) var max_health = 100
+export(int) var armor = 50
+
+export(int) var speed = 50
+
+export(int) var shells = 0
+export(int) var max_shells = 8
+export(int) var clips = 0
+export(int) var max_clips = 5
+export(int) var cells = 0
+export(int) var max_cells = 200
+export(NodePath) var active_weapon_path
+
 
 onready var animated_sprite = $AnimatedSprite
-onready var weapon = $Weapon
+
 
 var state = STATE.IDLE
-var ammo setget , get_ammo
+var active_weapon:BaseWeapon
+
 
 signal state_motion(velocity)
 signal state_idle
 signal state_dead
 signal hit
-signal fire
 # warning-ignore:unused_signal
 signal item_pickup(item)
-signal ammo_count_changed(count)
+signal ammo_count_changed
+
+
+func _ready():
+	if active_weapon_path:
+		active_weapon = get_node(active_weapon_path)
+		active_weapon.visible = true
+
 
 func _process(_delta):
 	if state == STATE.DEAD:
 		return
 
 	animated_sprite.flip_h = get_local_mouse_position().x <= 0
+	
+	if active_weapon:
+		aim(get_global_mouse_position())
 
 
 func _physics_process(_delta):
 	if (state == STATE.DEAD):
 		return
 	
-	var velocity = Vector2()
+	move(read_direction())
+
+	if can_fire() and active_weapon.check_fire():
+		fire()
+
+
+func read_direction() -> Vector2:
+	var direction = Vector2()
 	
-	# Movement
 	if (Input.is_action_pressed("player_move_up")):
-		velocity.y = -1
+		direction.y = -1
 	elif (Input.is_action_pressed("player_move_down")):
-		velocity.y = 1
+		direction.y = 1
 		
 	if (Input.is_action_pressed("player_move_left")):
-		velocity.x = -1
+		direction.x = -1
 	elif (Input.is_action_pressed("player_move_right")):
-		velocity.x = 1
+		direction.x = 1
 		
-	velocity = velocity.normalized()
-	velocity *= speed
+	direction = direction.normalized()
 	
-	if (velocity.length() > 0):
+	return direction
+
+
+func move(direction:Vector2):
+	direction *= speed
+	
+	if (direction.length() > 0):
 		state = STATE.MOVING
-		emit_signal("state_motion", velocity)
+		emit_signal("state_motion", direction)
 	else:
 		state = STATE.IDLE
 		emit_signal("state_idle")
 	
 	# warning-ignore:return_value_discarded
-	move_and_slide(velocity)
+	move_and_slide(direction)
+
+
+# Aim to a specified global position.
+func aim(target_position:Vector2):
+	active_weapon.look_at(target_position)
+	active_weapon.flip_v = target_position.x < global_position.x
 
 
 func hit(damage):
@@ -83,23 +120,38 @@ func hit(damage):
 		print_debug("%s is dead!" % name)
 		state = STATE.DEAD
 		emit_signal("state_dead")
-		
-		
-func get_ammo() -> int:
-	return weapon.ammo
-
-
-func get_weapon(weapon_name:String) -> Node2D:
-	return weapon.get_node(weapon_name)
-
-
-func _on_Weapon_fire():
-	emit_signal("fire")
 
 
 func is_max_health() -> bool:
 	return health >= max_health
 
 
-func _on_Weapon_ammo_count_changed(amount):
-	emit_signal("ammo_count_changed", amount)
+func can_fire() -> bool:
+	return active_weapon and active_weapon.is_idle and weapon_has_ammo()
+
+
+func fire():
+	active_weapon.fire()
+	match active_weapon.ammo_type:
+		BaseWeapon.AMMO_TYPE.SHELLS:
+			shells -= active_weapon.ammo_per_shot
+		BaseWeapon.AMMO_TYPE.CLIPS:
+			clips -= active_weapon.ammo_per_shot
+	
+	emit_signal("ammo_count_changed")
+	
+	
+func weapon_has_ammo() -> bool:
+	if ! active_weapon:
+		return false
+	
+	var ammo_count = 0
+	match active_weapon.ammo_type:
+		BaseWeapon.AMMO_TYPE.SHELLS:
+			ammo_count = shells
+		BaseWeapon.AMMO_TYPE.CLIPS:
+			ammo_count = clips
+		BaseWeapon.AMMO_TYPE.CELLS, _:
+			ammo_count = 0
+
+	return ammo_count >= active_weapon.ammo_per_shot

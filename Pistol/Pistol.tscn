@@ -24,8 +24,7 @@ playing = true
 offset = Vector2( 20, 6 )
 script = ExtResource( 3 )
 damage = 10
-max_ammo = 5
-ammo = 5
+ammo_type = 1
 hitscan_trail = ExtResource( 4 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
@@ -37,5 +36,3 @@ collide_with_areas = true
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -5,12 +5,12 @@ class_name ItemDrop
 
 
 const HEALTH_PACK = preload("res://HealthPack/HealthPack.tscn")
-const SHOTGUN_AMMO_PACK = preload("res://AmmoPack/ShotgunAmmoPack.tscn")
+const SHELL_PACK = preload("res://AmmoPack/ShotgunAmmoPack.tscn")
 
 
 export(int, 0, 100) var health_drop_chance = 50
 export(int, 0, 100) var armor_drop_chance = 50
-export(int, 0, 100) var shotgun_ammo_drop_chance = 50
+export(int, 0, 100) var shell_drop_chance = 50
 export(int) var item_count = 1
 
 
@@ -33,7 +33,7 @@ func drop():
 		return
 		
 	roll(health_drop_chance, HEALTH_PACK)
-	roll(shotgun_ammo_drop_chance, SHOTGUN_AMMO_PACK)
+	roll(shell_drop_chance, SHELL_PACK)
 	dropped = true
 
 	

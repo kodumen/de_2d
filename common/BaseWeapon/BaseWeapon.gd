@@ -7,9 +7,16 @@ class_name BaseWeapon
 extends AnimatedSprite
 
 
+enum AMMO_TYPE {
+	SHELLS,
+	CLIPS,
+	CELLS
+}
+
+
 export(int) var damage = 50
-export(int) var max_ammo = 8
-export(int) var ammo = 8 setget set_ammo
+export(AMMO_TYPE) var ammo_type
+export(int) var ammo_per_shot = 1
 export(PackedScene) var hitscan_trail
 # This property does not have a setter. Call set_next_weapon() instead.
 export(NodePath) var next_weapon_path
@@ -56,18 +63,8 @@ func check_fire() -> bool:
 # Override this depending on how the weapon should behave.
 # Make sure to call the parent fire() method.
 func fire():
-	set_ammo(ammo - 1)
 	play("fire")
 	is_idle = false
-
-
-func is_max_ammo() -> bool:
-	return ammo >= max_ammo
-	
-
-# Check ammo and state
-func can_fire() -> bool:
-	return ammo > 0 and is_idle
 
 
 func _on_animation_finished():
@@ -97,11 +94,6 @@ func check_hit(ray_cast: RayCast2D):
 			print_debug(ray_cast.name + " dealt " + str(ray_damage) + " DMG!")
 	else:
 		print_debug(ray_cast.name + " did not hit anything")
-
-
-func set_ammo(amount):
-	ammo = amount
-	emit_signal("ammo_count_changed", amount)
 	
 
 func set_next_weapon(weapon_node):
