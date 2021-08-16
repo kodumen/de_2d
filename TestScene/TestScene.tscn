@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Zombie/Zombie.tscn" type="PackedScene" id=2]
 [ext_resource path="res://HUD/HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://TestScene/test_map.png" type="Texture" id=4]
+[ext_resource path="res://Imp/Imp.tscn" type="PackedScene" id=5]
 [ext_resource path="res://common/Wall/Wall.gd" type="Script" id=6]
 [ext_resource path="res://common/HitEffect/HitEffectPlayer.gd" type="Script" id=7]
 [ext_resource path="res://common/Dust/Dust.tscn" type="PackedScene" id=8]
@@ -60,22 +61,55 @@ navpoly = SubResource( 1 )
 [node name="Player" parent="World" groups=[
 "Player",
 ] instance=ExtResource( 1 )]
-position = Vector2( -65.1027, -37.2212 )
+position = Vector2( -754.324, -762.402 )
 
 [node name="Zombie" parent="World" instance=ExtResource( 2 )]
-position = Vector2( 376.075, 4.49493 )
+position = Vector2( 717.689, -163.315 )
 
 [node name="Zombie2" parent="World" instance=ExtResource( 2 )]
-position = Vector2( 119.865, -238.231 )
+position = Vector2( 29.9563, -762.507 )
 
 [node name="Zombie3" parent="World" instance=ExtResource( 2 )]
-position = Vector2( -376.075, 44.9492 )
+position = Vector2( -717.689, -143.837 )
 
 [node name="Zombie4" parent="World" instance=ExtResource( 2 )]
-position = Vector2( -77.912, 200.773 )
+position = Vector2( -767.133, 752.15 )
 
 [node name="Zombie5" parent="World" instance=ExtResource( 2 )]
-position = Vector2( -7.49164, 406.041 )
+position = Vector2( 717.689, 729.675 )
+
+[node name="Imp" parent="World" instance=ExtResource( 5 )]
+position = Vector2( -324.287, 805.372 )
+
+[node name="Imp2" parent="World" instance=ExtResource( 5 )]
+position = Vector2( 445.449, 805.372 )
+
+[node name="Imp3" parent="World" instance=ExtResource( 5 )]
+position = Vector2( -751.918, -416.941 )
+
+[node name="Imp4" parent="World" instance=ExtResource( 5 )]
+position = Vector2( 723.41, -463.267 )
+
+[node name="Imp5" parent="World" instance=ExtResource( 5 )]
+position = Vector2( -153.235, -580.866 )
+
+[node name="Imp6" parent="World" instance=ExtResource( 5 )]
+position = Vector2( 174.616, -566.612 )
+
+[node name="Imp7" parent="World" instance=ExtResource( 5 )]
+position = Vector2( -217.379, 402.686 )
+
+[node name="Imp8" parent="World" instance=ExtResource( 5 )]
+position = Vector2( 128.289, 409.813 )
+
+[node name="Imp9" parent="World" instance=ExtResource( 5 )]
+position = Vector2( -49.8904, 673.519 )
+
+[node name="Imp10" parent="World" instance=ExtResource( 5 )]
+position = Vector2( -484.649, 92.6534 )
+
+[node name="Imp11" parent="World" instance=ExtResource( 5 )]
+position = Vector2( 339.19, 77.1033 )
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
 player_path = NodePath("../World/Player")

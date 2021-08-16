@@ -71,7 +71,7 @@ func _process(_delta):
 
 
 func _physics_process(_delta):
-	if (state == STATE.DEAD):
+	if state == STATE.DEAD:
 		return
 	
 	move(read_direction())
@@ -81,6 +81,9 @@ func _physics_process(_delta):
 
 
 func _input(event:InputEvent):
+	if state == STATE.DEAD:
+		return
+		
 	if weapon_1 and event.is_action_pressed("player_weapon_1"):
 		switch_weapon(weapon_1)
 	elif weapon_2 and event.is_action_pressed("player_weapon_2"):
@@ -209,3 +212,7 @@ func _on_WeaponSwitchAnimation_weapon_ready(weapon:BaseWeapon):
 	weapon_ready = true
 	if weapon_queue_lift:
 		call_deferred("switch_weapon", weapon_queue_lift)
+
+
+func _on_Player_state_dead():
+	active_weapon.visible = false

@@ -115,6 +115,7 @@ next_weapon_path = NodePath("../Shotgun")
 [node name="WeaponSwitchAnimation" parent="." instance=ExtResource( 17 )]
 
 [connection signal="hit" from="." to="Camera2D" method="_on_Player_hit"]
+[connection signal="state_dead" from="." to="." method="_on_Player_state_dead"]
 [connection signal="state_dead" from="." to="AnimatedSprite" method="_on_Player_state_dead"]
 [connection signal="state_idle" from="." to="AnimatedSprite" method="_on_Player_state_idle"]
 [connection signal="state_motion" from="." to="AnimatedSprite" method="_on_Player_state_motion"]
