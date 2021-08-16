@@ -26,6 +26,8 @@ script = ExtResource( 3 )
 damage = 10
 ammo_type = 1
 hitscan_trail = ExtResource( 4 )
+lower_speed = 0.2
+lift_speed = 0.2
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
@@ -36,3 +38,5 @@ collide_with_areas = true
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

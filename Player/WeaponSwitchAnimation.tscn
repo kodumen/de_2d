@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Player/WeaponSwitchAnimation.gd" type="Script" id=1]
+[ext_resource path="res://Player/RemoteWeaponProps.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "weapon_lift"
+tracks/0/type = "value"
+tracks/0/path = NodePath("RemoteWeaponProps:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 24 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RemoteWeaponProps:remote_opacity")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "weapon_lower"
+tracks/0/type = "value"
+tracks/0/path = NodePath("RemoteWeaponProps:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 24 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RemoteWeaponProps:remote_opacity")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[node name="WeaponSwitchAnimation" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/weapon_lift = SubResource( 1 )
+anims/weapon_lower = SubResource( 2 )
+
+[node name="RemoteWeaponProps" type="RemoteTransform2D" parent="."]
+update_rotation = false
+update_scale = false
+script = ExtResource( 2 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

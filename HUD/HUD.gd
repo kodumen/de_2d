@@ -50,7 +50,7 @@ func _update_hud():
 	armor_label.text = "Armor: %d" % player.armor
 	
 	shell_label.text = "Shells: %d" % player.shells
-	clip_label.text = "Clips: %d" % player.clips
+	clip_label.text = "Infinite: %d" % INF
 	cell_label.text = "Cells: %d" % player.cells
 	
 	no_ammo.visible = ! player.weapon_has_ammo()

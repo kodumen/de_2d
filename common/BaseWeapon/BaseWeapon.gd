@@ -9,8 +9,8 @@ extends AnimatedSprite
 
 enum AMMO_TYPE {
 	SHELLS,
-	CLIPS,
-	CELLS
+	CELLS,
+	INFINITE
 }
 
 
@@ -20,6 +20,8 @@ export(int) var ammo_per_shot = 1
 export(PackedScene) var hitscan_trail
 # This property does not have a setter. Call set_next_weapon() instead.
 export(NodePath) var next_weapon_path
+export(float) var lower_speed = 1
+export(float) var lift_speed = 1
 
 
 # A reference to the world for a better DX.

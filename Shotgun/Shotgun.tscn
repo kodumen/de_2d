@@ -30,6 +30,8 @@ playing = true
 offset = Vector2( 24, 4 )
 script = ExtResource( 3 )
 hitscan_trail = ExtResource( 9 )
+lower_speed = 0.5
+lift_speed = 0.5
 
 [node name="RayCast2D1" type="RayCast2D" parent="."]
 rotation = -0.0872665
