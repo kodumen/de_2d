@@ -1,0 +1,73 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://Soldier/Soldier.gd" type="Script" id=1]
+[ext_resource path="res://Soldier/soldier_default-2.png" type="Texture" id=2]
+[ext_resource path="res://Soldier/soldier_default-1.png" type="Texture" id=3]
+[ext_resource path="res://common/Enemy/EnemyAnimatedSprite.gd" type="Script" id=4]
+[ext_resource path="res://Soldier/soldier_move-4.png" type="Texture" id=5]
+[ext_resource path="res://Soldier/soldier_dead-1.png" type="Texture" id=6]
+[ext_resource path="res://Soldier/soldier_dead-2.png" type="Texture" id=7]
+[ext_resource path="res://Soldier/soldier_dead-8.png" type="Texture" id=8]
+[ext_resource path="res://Soldier/soldier_move-2.png" type="Texture" id=9]
+[ext_resource path="res://Soldier/soldier_move-1.png" type="Texture" id=10]
+[ext_resource path="res://Soldier/soldier_move-3.png" type="Texture" id=11]
+[ext_resource path="res://Soldier/soldier_dead-3.png" type="Texture" id=12]
+[ext_resource path="res://Soldier/soldier_dead-4.png" type="Texture" id=13]
+[ext_resource path="res://Soldier/soldier_dead-6.png" type="Texture" id=14]
+[ext_resource path="res://Soldier/soldier_dead-5.png" type="Texture" id=15]
+[ext_resource path="res://common/HitBox.gd" type="Script" id=16]
+[ext_resource path="res://common/Blood/Blood.tscn" type="PackedScene" id=17]
+[ext_resource path="res://common/HitEffect/HitEffectPlayer.gd" type="Script" id=18]
+[ext_resource path="res://Soldier/soldier_dead-7.png" type="Texture" id=19]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "move",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 19 ), ExtResource( 8 ) ],
+"loop": false,
+"name": "dead",
+"speed": 8.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 30.0
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 37.2669
+height = 39.1762
+
+[node name="Soldier" type="KinematicBody2D"]
+collision_layer = 16390
+collision_mask = 131077
+collision/safe_margin = 25.0
+script = ExtResource( 1 )
+speed = 40
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+playing = true
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 262144
+collision_mask = 0
+script = ExtResource( 16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource( 3 )
+
+[node name="HitEffectPlayer" type="Node2D" parent="HitBox"]
+script = ExtResource( 18 )
+hit_effect = ExtResource( 17 )
