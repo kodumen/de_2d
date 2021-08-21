@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Soldier/Soldier.gd" type="Script" id=1]
 [ext_resource path="res://Soldier/soldier_default-2.png" type="Texture" id=2]
@@ -19,6 +19,8 @@
 [ext_resource path="res://common/Blood/Blood.tscn" type="PackedScene" id=17]
 [ext_resource path="res://common/HitEffect/HitEffectPlayer.gd" type="Script" id=18]
 [ext_resource path="res://Soldier/soldier_dead-7.png" type="Texture" id=19]
+[ext_resource path="res://common/Sightline/Sightline.gd" type="Script" id=20]
+[ext_resource path="res://Soldier/SoldierGun.tscn" type="PackedScene" id=21]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -26,6 +28,11 @@ animations = [ {
 "loop": true,
 "name": "default",
 "speed": 2.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "attack_ranged",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 10 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 5 ) ],
 "loop": true,
@@ -45,15 +52,29 @@ radius = 30.0
 radius = 37.2669
 height = 39.1762
 
+[sub_resource type="CircleShape2D" id=4]
+radius = 519.708
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 350.0
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 124.323
+
 [node name="Soldier" type="KinematicBody2D"]
 collision_layer = 16390
 collision_mask = 131077
 collision/safe_margin = 25.0
 script = ExtResource( 1 )
 speed = 40
+attack_melee = 0
+attack_ranged = 4
+state = 0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
+animation = "attack_ranged"
+frame = 1
 playing = true
 script = ExtResource( 4 )
 
@@ -71,3 +92,41 @@ shape = SubResource( 3 )
 [node name="HitEffectPlayer" type="Node2D" parent="HitBox"]
 script = ExtResource( 18 )
 hit_effect = ExtResource( 17 )
+
+[node name="ChaseZone" type="Area2D" parent="."]
+collision_layer = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseZone"]
+shape = SubResource( 4 )
+
+[node name="RangedAttackZone" type="Area2D" parent="."]
+collision_layer = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangedAttackZone"]
+shape = SubResource( 5 )
+
+[node name="Sightline" type="Node2D" parent="."]
+script = ExtResource( 20 )
+sight_range = 350
+view_mask = 131072
+fov = 10.0
+
+[node name="SoldierGun" parent="." instance=ExtResource( 21 )]
+position = Vector2( 0, 15.7145 )
+
+[node name="PointBlankZone" type="Area2D" parent="."]
+collision_layer = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PointBlankZone"]
+shape = SubResource( 6 )
+
+[connection signal="state_attack_ranged" from="." to="SoldierGun" method="_on_Soldier_state_attack_ranged"]
+[connection signal="state_dead" from="." to="SoldierGun" method="_on_Soldier_state_dead"]
+[connection signal="state_idle" from="." to="SoldierGun" method="_on_Soldier_state_idle"]
+[connection signal="state_moving" from="." to="SoldierGun" method="_on_Soldier_state_moving"]
+[connection signal="body_entered" from="ChaseZone" to="." method="_on_ChaseZone_body_entered"]
+[connection signal="body_exited" from="ChaseZone" to="." method="_on_ChaseZone_body_exited"]
+[connection signal="body_entered" from="RangedAttackZone" to="." method="_on_RangedAttackZone_body_entered"]
+[connection signal="body_exited" from="RangedAttackZone" to="." method="_on_RangedAttackZone_body_exited"]
+[connection signal="body_entered" from="PointBlankZone" to="." method="_on_PointBlankZone_body_entered"]
+[connection signal="body_exited" from="PointBlankZone" to="." method="_on_PointBlankZone_body_exited"]

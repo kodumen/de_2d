@@ -25,7 +25,7 @@ export(NodePath) var nav_2d_path
 
 # The enemy's initial state. If a target is set,
 # the state changes to MOVING.
-export(STATE) var state = STATE.IDLE setget set_state
+export(STATE) var state = STATE.MOVING setget set_state
 
 var target:Node2D setget set_target
 var nav_2d:Navigation2D
@@ -126,7 +126,6 @@ func _physics_process(_delta):
 
 func set_target(value:Node2D):
 	target = value
-	set_state(STATE.MOVING)
 	print_debug("%s is targeting %s!" % [name, target.name])
 	
 	# Hard-code signal bindings to the player for convenience (??).

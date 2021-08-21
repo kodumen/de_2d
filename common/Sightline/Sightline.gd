@@ -7,7 +7,7 @@ class_name Sightline
 export(int) var sight_range = 400
 export(int, LAYERS_2D_PHYSICS) var view_mask
 export(int, 1, 10) var ray_count = 3
-export(float, 30, 180) var fov = 45 
+export(float, 1, 180) var fov = 45 
 
 
 func _ready():

@@ -1,12 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Soldier/Soldier.tscn" type="PackedScene" id=2]
 [ext_resource path="res://HUD/HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://TestScene/test_map.png" type="Texture" id=4]
+[ext_resource path="res://Imp/Imp.tscn" type="PackedScene" id=5]
 [ext_resource path="res://common/Wall/Wall.gd" type="Script" id=6]
 [ext_resource path="res://common/HitEffect/HitEffectPlayer.gd" type="Script" id=7]
 [ext_resource path="res://common/Dust/Dust.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Zombie/Zombie.tscn" type="PackedScene" id=9]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 719.692, 495.194, 819.665, 94.8611, 831.665, 646.861, 682.146, 681.446, 704.543, 76.1558, 837.665, -117.139, 609.406, -4.71033, 460.34, -259.431, 440.862, -554.598, 559.228, -544.109, 849.665, 846.861, 577.665, 862.861, 594.594, 726.344, 327.448, 730.834, 56.8011, 846.694, -395.418, 766.753, -132.335, 710.861, 145.609, 670.221, -210.167, 866.717, -626.637, 842.69, -623.494, -505.337, -485.494, -521.337, -488.335, -297.139, -844.335, 142.861, 214.618, -699.933, 223.607, -117.092, -223.494, -157.337, -231.494, -523.337, -263.494, -757.337, -604.335, 726.861, -850.335, 846.861, -842.335, 568.861, -662.335, 676.861, 679.665, -889.139, 879.665, -873.139, 861.665, -681.139, 667.106, -705.927, 587.696, -795.825, 479.665, -887.139, 264.062, -806.313, -544.335, -857.139, -401.494, -769.337, -688.335, -717.139, -850.335, -859.139, -709.494, -571.337, -676.335, 138.861, -461.494, -103.337, -624.335, 102.861, 643.133, -598.048, 440.862, -121.587, 452.431, 66.6421, 328.489, -49.668, 271.671, 287.835, 111.935, 580.424, -108.067, 575.935, 152.344, 456.954, -702.335, 582.861, -700.335, 396.861, -706.335, 214.861, -411.132, 192.053, -339.494, -61.3365, -191.13, 412.055 )
@@ -65,19 +67,37 @@ position = Vector2( -754.324, -762.402 )
 [node name="Soldier" parent="World" instance=ExtResource( 2 )]
 
 [node name="Soldier2" parent="World" instance=ExtResource( 2 )]
-position = Vector2( -194.887, 262.963 )
+position = Vector2( -781.001, 457.171 )
 
 [node name="Soldier3" parent="World" instance=ExtResource( 2 )]
-position = Vector2( -585.202, 15.102 )
+position = Vector2( 615.911, -431.773 )
 
-[node name="Soldier4" parent="World" instance=ExtResource( 2 )]
-position = Vector2( -105.714, -445.509 )
+[node name="Imp" parent="World" instance=ExtResource( 5 )]
+position = Vector2( 438.123, -19.0488 )
 
-[node name="Soldier5" parent="World" instance=ExtResource( 2 )]
-position = Vector2( 709.794, -296.377 )
+[node name="Imp2" parent="World" instance=ExtResource( 5 )]
+position = Vector2( -3.17493, 527.017 )
 
-[node name="Soldier6" parent="World" instance=ExtResource( 2 )]
-position = Vector2( 752.142, 73.6216 )
+[node name="Imp3" parent="World" instance=ExtResource( 5 )]
+position = Vector2( -574.639, 9.52441 )
+
+[node name="Imp4" parent="World" instance=ExtResource( 5 )]
+position = Vector2( 25.3983, -527.017 )
+
+[node name="Zombie" parent="World" instance=ExtResource( 9 )]
+position = Vector2( 679.408, 730.204 )
+
+[node name="Zombie2" parent="World" instance=ExtResource( 9 )]
+position = Vector2( 250.809, 298.432 )
+
+[node name="Zombie3" parent="World" instance=ExtResource( 9 )]
+position = Vector2( -593.688, -333.354 )
+
+[node name="Zombie4" parent="World" instance=ExtResource( 9 )]
+position = Vector2( 47.6219, -755.603 )
+
+[node name="Zombie5" parent="World" instance=ExtResource( 9 )]
+position = Vector2( -723.855, 736.554 )
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
 player_path = NodePath("../World/Player")
