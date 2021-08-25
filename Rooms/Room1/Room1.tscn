@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Rooms/Room1/room1.png" type="Texture" id=1]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Zombie/Zombie.tscn" type="PackedScene" id=3]
+[ext_resource path="res://common/Wall/Wall.gd" type="Script" id=4]
+[ext_resource path="res://common/Dust/Dust.tscn" type="PackedScene" id=5]
+[ext_resource path="res://common/HitEffect/HitEffectPlayer.gd" type="Script" id=6]
+[ext_resource path="res://Rooms/Room1/Room1.gd" type="Script" id=7]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( -599.408, 44.1197, -410.508, 39.3575, -410.508, 101.266, -601.789, 101.266, -129.538, 716.384, -162.873, 756.863, -515.276, 743.37, -891.236, 543.868, -885, 200.872, -879.655, 142.964, -824.026, 129.839, -634.331, 136.189, -130.331, 510.022, -366.854, 131.427, -189.065, 134.602, -128.744, 165.556, -851.146, 742.539, -893.018, 719.375 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 7, 8, 9, 10, 11, 12 ), PoolIntArray( 13, 14, 15, 12, 11 ), PoolIntArray( 16, 17, 7, 6 ), PoolIntArray( 2, 13, 11, 3 ) ]
+outlines = [ PoolVector2Array( -879.655, 142.964, -885, 200.872, -891.236, 543.868, -893.018, 719.375, -851.146, 742.539, -515.276, 743.37, -162.873, 756.863, -129.538, 716.384, -130.331, 510.022, -128.744, 165.556, -189.065, 134.602, -366.854, 131.427, -410.508, 101.266, -410.508, 39.3575, -599.408, 44.1197, -601.789, 101.266, -634.331, 136.189, -824.026, 129.839 ) ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 143.915, 40.634 )
+
+[node name="Room1" type="Node2D"]
+script = ExtResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+
+[node name="World" type="YSort" parent="." groups=[
+"World",
+]]
+
+[node name="Player" parent="World" groups=[
+"Player",
+] instance=ExtResource( 2 )]
+position = Vector2( -704.806, 574.639 )
+health = 50
+
+[node name="Zombie" parent="World" instance=ExtResource( 3 )]
+position = Vector2( -313.433, 576.039 )
+
+[node name="Zombie2" parent="World" instance=ExtResource( 3 )]
+position = Vector2( -323.333, 322.895 )
+
+[node name="Zombie3" parent="World" instance=ExtResource( 3 )]
+position = Vector2( -710.827, 188.545 )
+
+[node name="Wall" type="StaticBody2D" parent="."]
+collision_layer = 131072
+collision_mask = 524291
+script = ExtResource( 4 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Wall"]
+polygon = PoolVector2Array( -634.194, 11.9643, -631.674, 82.5199, -641.753, 92.5993, -840.821, 95.1191, -883.658, 102.679, -913.896, 129.137, -920.196, 154.335, -931.535, 463.016, -931.535, 736.419, -920.196, 761.617, -896.258, 779.256, -823.182, 785.556, -630.414, 781.776, -233.539, 784.296, -132.745, 781.776, -110.067, 769.177, -99.9874, 712.48, -98.7277, 386.161, -101.247, 151.816, -112.587, 119.058, -145.345, 106.458, -317.954, 100.159, -358.271, 97.6389, -375.91, 82.5199, -385.99, 6.92465, -91.1684, 0.624939, -1.71375, 29.6032, 2.06616, 876.27, -569.938, 887.609, -1023.51, 862.411, -1022.25, 1.88487, -656.873, 1.88487 )
+
+[node name="Navigation2D" type="Navigation2D" parent="Wall" groups=[
+"Navigation",
+]]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Wall/Navigation2D"]
+navpoly = SubResource( 1 )
+
+[node name="HitEffectPlayer" type="Node2D" parent="Wall"]
+script = ExtResource( 6 )
+hit_effect = ExtResource( 5 )
+
+[node name="Door" type="StaticBody2D" parent="."]
+position = Vector2( -513.19, -23.261 )
+collision_layer = 131072
+collision_mask = 524291
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+shape = SubResource( 2 )
+
+[node name="HitEffectPlayer" type="Node2D" parent="Door"]
+script = ExtResource( 6 )
+hit_effect = ExtResource( 5 )

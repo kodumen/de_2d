@@ -141,6 +141,7 @@ func set_state(value:int):
 			emit_signal("state_idle")
 		STATE.DEAD:
 			emit_signal("state_dead")
+			EventBus.emit_signal("enemy_state_dead", self)
 		STATE.ATTACK_MELEE:
 			emit_signal("state_attack_melee", target, attack_melee)
 		STATE.ATTACK_RANGED:

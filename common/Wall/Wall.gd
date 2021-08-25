@@ -21,3 +21,9 @@ func find_hit_effect_player() -> HitEffectPlayer:
 
 func hit(_attack, hit_position):
 	hit_effect_player.play(hit_position)
+	
+	
+func disable():
+	for child in get_children():
+		if child is CollisionShape2D or child is CollisionPolygon2D:
+			child.set_deferred("disabled", true)
