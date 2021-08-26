@@ -63,12 +63,8 @@ navpoly = SubResource( 1 )
 position = Vector2( 4.45435, 510.695 )
 
 [node name="Zombie" parent="World" instance=ExtResource( 9 )]
-
-[node name="Zombie2" parent="World" instance=ExtResource( 9 )]
-position = Vector2( -152.391, 190.488 )
-
-[node name="Zombie3" parent="World" instance=ExtResource( 9 )]
-position = Vector2( 136.517, 190.488 )
+target_player = false
+valid_targets = 3
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
 player_path = NodePath("../World/Player")

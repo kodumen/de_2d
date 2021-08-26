@@ -5,6 +5,7 @@ class_name Enemy
 
 
 const ENEMY_GROUP = "Enemy"
+const TARGET_ZONE = preload("res://common/Enemy/TargetZone.tscn")
 
 enum STATE {
 	IDLE,
@@ -27,11 +28,18 @@ export(NodePath) var nav_2d_path
 # the state changes to MOVING.
 export(STATE) var state = STATE.MOVING setget set_state
 
+# Only relevant if target_player is false.
+# A target zone will be established to target the first entity to enter it.
+# Select only layers for players and enemies. Unexpected things
+# might happen otherwise.
+export(int, LAYERS_2D_PHYSICS) var valid_targets
+
 var target:Node2D setget set_target
 var nav_2d:Navigation2D
 var animated_sprite:AnimatedSprite
 var hit_box:HitBox
 var movement_collider:CollisionShape2D
+var target_zone:Area2D
 # If a custom hit box is used, default listeners will not
 # be connected. You must call the hit() method to deal damage to the
 # enemy. You can then ignore the hit_box property. Use this for weakpoints.
@@ -56,6 +64,11 @@ func _ready():
 		set_target(get_node(target_path))
 	elif target_player:
 		set_target(DependencyInjector.player)
+	elif target_zone == null:
+		target_zone = TARGET_ZONE.instance()
+		target_zone.collision_mask = valid_targets
+		target_zone.connect("body_entered", self, "_on_TargetZone_body_entered")
+		add_child(target_zone)
 
 	# Set nav 2D
 	if nav_2d_path:
@@ -128,8 +141,7 @@ func set_target(value:Node2D):
 	target = value
 	print_debug("%s is targeting %s!" % [name, target.name])
 	
-	# Hard-code signal bindings to the player for convenience (??).
-	if target.is_in_group("Player"):
+	if target.has_signal("state_dead"):
 		# warning-ignore:return_value_discarded
 		target.connect("state_dead", self, "_on_target_state_dead")
 
@@ -191,4 +203,12 @@ func hit(damage):
 func _on_Enemy_state_dead():
 	movement_collider.set_deferred("disabled", true)
 	hit_box.disabled(true)
+	
+
+func _on_TargetZone_body_entered(body):
+	if body == self or is_a_parent_of(body):
+		return
+
+	set_target(body)
+	target_zone.queue_free()
 	

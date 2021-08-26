@@ -111,7 +111,7 @@ _global_script_class_icons={
 [application]
 
 config/name="De 2d"
-run/main_scene="res://TestScene/TestScene.tscn"
+run/main_scene="res://Rooms/Room1/Room1.tscn"
 config/icon="res://icon.png"
 
 [autoload]

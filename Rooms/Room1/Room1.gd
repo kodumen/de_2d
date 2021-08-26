@@ -9,16 +9,17 @@ func _ready():
 	
 	
 func _on_enemy_state_dead(_enemy):
-	var living = living_enemies()
+	var living = living_enemies("Wave 1")
 	print_debug("%d enemies remaining." % living)
-	if living_enemies() == 0:
+	if living == 0:
 		door.disable()
 		
 		
-func living_enemies():
+func living_enemies(group):
 	var count = 0
-	for enemy in get_tree().get_nodes_in_group("Enemy"):
-		if enemy.state != Enemy.STATE.DEAD \
+	for enemy in get_tree().get_nodes_in_group(group):
+		if enemy is Enemy \
+		and enemy.state != Enemy.STATE.DEAD \
 		and is_a_parent_of(enemy):
 			count += 1
 	
