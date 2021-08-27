@@ -6,17 +6,6 @@ var nav_2d:Navigation2D setget , get_nav_2d
 var world:Node2D setget , get_world
 
 
-func _ready():
-	if ! world:
-		# In the absence of a world, create a new one
-		# to act as a stand-in. Useful when running a scene in
-		# isolation. 
-		var stand_in_world = Node2D.new()
-		get_tree().root.call_deferred("add_child", stand_in_world)
-		world = stand_in_world
-		
-
-
 func get_player() -> Node2D:
 	if player:
 		return player
@@ -46,5 +35,13 @@ func get_world() -> Node2D:
 	var worlds = get_tree().get_nodes_in_group("World")
 	if (len(worlds) > 0):
 		world = worlds[0]
+
+	if ! world:
+		# In the absence of a world, create a new one
+		# to act as a stand-in. Useful when running a scene in
+		# isolation. 
+		var stand_in_world = Node2D.new()
+		get_tree().root.call_deferred("add_child", stand_in_world)
+		world = stand_in_world
 
 	return world

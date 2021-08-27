@@ -139,6 +139,10 @@ func _physics_process(_delta):
 
 func set_target(value:Node2D):
 	target = value
+	
+	if target == null:
+		return
+	
 	print_debug("%s is targeting %s!" % [name, target.name])
 	
 	if target.has_signal("state_dead"):
@@ -147,6 +151,9 @@ func set_target(value:Node2D):
 
 
 func set_state(value:int):
+	if value == state:
+		return
+		
 	state = value
 	match(state):
 		STATE.IDLE:

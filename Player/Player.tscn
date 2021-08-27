@@ -60,8 +60,9 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 25.0
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 25.4153
+height = 12.9134
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 81.0108
@@ -87,12 +88,11 @@ anims/shake = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
-frame = 1
 playing = true
 script = ExtResource( 8 )
 
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -0.15749 )
+position = Vector2( 0, 34.3036 )
 shape = SubResource( 3 )
 
 [node name="PickupZone" type="Area2D" parent="."]

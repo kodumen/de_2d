@@ -89,7 +89,6 @@ attack_melee = 25
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -13 )
 frames = SubResource( 1 )
-frame = 1
 playing = true
 script = ExtResource( 8 )
 
@@ -131,8 +130,8 @@ collision_layer = 1024
 modulate = Color( 0.407843, 0.0823529, 0.243137, 1 )
 shape = SubResource( 6 )
 
-[connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_AnimatedSprite_frame_changed"]
 [connection signal="frame_changed" from="AnimatedSprite" to="FireballSpawn" method="_on_AnimatedSprite_frame_changed"]
+[connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_AnimatedSprite_frame_changed"]
 [connection signal="body_entered" from="RangedAttackZone" to="." method="_on_RangedAttackZone_body_entered"]
 [connection signal="body_exited" from="RangedAttackZone" to="." method="_on_RangedAttackZone_body_exited"]
 [connection signal="body_entered" from="MeleeAttackZone" to="." method="_on_MeleeAttackZone_body_entered"]
