@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://EnemySpawner/Fire.tres" type="Material" id=1]
+
+[node name="Particles2D" type="Particles2D"]
+amount = 200
+lifetime = 3.0
+speed_scale = 3.0
+explosiveness = 0.2
+process_material = ExtResource( 1 )

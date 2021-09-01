@@ -4,6 +4,9 @@ class_name EnemySpawner
 extends Node2D
 
 
+const FIRE = preload("res://EnemySpawner/Particles2D.tscn")
+
+
 export(PackedScene) var enemy_scene
 export(bool) var oneshot = true
 export(NodePath) var spawn_on_death_of_enemy_path
@@ -23,10 +26,21 @@ func _ready():
 	
 func _on_enemy_state_dead():
 	print_debug("%s is dead! Spawning!" % spawn_on_death_of_enemy.name)
+	var fire = FIRE.instance()
+	add_child(fire)
+	fire.global_position = global_position
+	var timer = Timer.new()
+	timer.wait_time = 1.5
+	timer.one_shot = true
+	timer.connect("timeout", self, "_on_timer_timeout")
+	add_child(timer)
+	timer.start()
+
+
+func _on_timer_timeout():
 	spawn()
 	if oneshot:
 		queue_free()	
-
 
 
 func spawn():

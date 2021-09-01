@@ -16,3 +16,7 @@ func _on_Player_state_motion(velocity):
 		play("move_reversed")
 	elif (velocity.y != 0):
 		play("move")
+
+
+func _on_Player_state_exiting():
+	play("default")

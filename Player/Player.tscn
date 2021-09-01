@@ -117,6 +117,7 @@ next_weapon_path = NodePath("../Shotgun")
 [connection signal="hit" from="." to="Camera2D" method="_on_Player_hit"]
 [connection signal="state_dead" from="." to="." method="_on_Player_state_dead"]
 [connection signal="state_dead" from="." to="AnimatedSprite" method="_on_Player_state_dead"]
+[connection signal="state_exiting" from="." to="AnimatedSprite" method="_on_Player_state_exiting"]
 [connection signal="state_idle" from="." to="AnimatedSprite" method="_on_Player_state_idle"]
 [connection signal="state_motion" from="." to="AnimatedSprite" method="_on_Player_state_motion"]
 [connection signal="weapon_ready" from="WeaponSwitchAnimation" to="." method="_on_WeaponSwitchAnimation_weapon_ready"]

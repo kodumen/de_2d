@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Rooms/Room1/room1.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://Rooms/Room1/Room1.gd" type="Script" id=7]
 [ext_resource path="res://Imp/Imp.tscn" type="PackedScene" id=8]
 [ext_resource path="res://EnemySpawner/EnemySpawner.gd" type="Script" id=9]
+[ext_resource path="res://Exit/Exit.gd" type="Script" id=10]
+[ext_resource path="res://Rooms/Room999/Room999.tscn" type="PackedScene" id=11]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 911.896, -605.893, 902.917, -443.136, 726.69, -464.463, 646.995, -630.587, 416.891, -443.136, 311.379, -623.852, 375.359, -393.748, 371.992, -174.868, 295.664, -171.5, 284.44, -416.197, -115.157, -904.468, -34.3396, -905.59, -28.7273, -699.057, -120.769, -697.935, -13.0127, -653.036, -247.607, -475.687, -166.79, -648.546, -129.538, 716.384, -162.873, 756.863, -515.276, 743.37, -891.236, 543.868, -885, 200.872, -879.655, 142.964, -824.026, 129.839, -634.331, 136.189, -130.331, 510.022, 238.419, -457.728, 21.7836, -629.465, 49.845, -471.197, -437.303, -596.913, -289.138, -640.689, -356.486, -425.176, -525.978, -502.626, -580.979, -381.4, -405.874, -339.869, -605.673, -272.521, -419.344, -275.889, -410.508, 101.266, -601.789, 101.266, -366.854, 131.427, -189.065, 134.602, -128.744, 165.556, -851.146, 742.539, -893.018, 719.375 )
@@ -17,6 +19,9 @@ outlines = [ PoolVector2Array( -879.655, 142.964, -885, 200.872, -891.236, 543.8
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 143.915, 40.634 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 54.7377, 132.179 )
 
 [node name="Room1" type="Node2D"]
 script = ExtResource( 7 )
@@ -110,3 +115,12 @@ shape = SubResource( 2 )
 [node name="HitEffectPlayer" type="Node2D" parent="Door"]
 script = ExtResource( 6 )
 hit_effect = ExtResource( 5 )
+
+[node name="Exit" type="Area2D" parent="."]
+position = Vector2( 944.167, -530.475 )
+collision_layer = 1024
+script = ExtResource( 10 )
+next_room = ExtResource( 11 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+shape = SubResource( 3 )

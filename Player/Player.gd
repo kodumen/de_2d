@@ -8,6 +8,7 @@ enum STATE {
 	IDLE
 	MOVING
 	DEAD
+	EXITING
 }
 
 
@@ -41,6 +42,7 @@ var weapon_queue_lift
 signal state_motion(velocity)
 signal state_idle
 signal state_dead
+signal state_exiting
 signal hit
 # warning-ignore:unused_signal
 signal item_pickup(item)
@@ -58,6 +60,9 @@ func _ready():
 	
 	if weapon_2_path:
 		weapon_2 = get_node(weapon_2_path)
+		
+	# warning-ignore:return_value_discarded
+	EventBus.connect("player_entered_exit", self, "_on_Player_entered_exit")
 
 
 func _process(_delta):
@@ -71,7 +76,7 @@ func _process(_delta):
 
 
 func _physics_process(_delta):
-	if state == STATE.DEAD:
+	if state == STATE.DEAD or state == STATE.EXITING:
 		return
 	
 	move(read_direction())
@@ -81,7 +86,7 @@ func _physics_process(_delta):
 
 
 func _input(event:InputEvent):
-	if state == STATE.DEAD:
+	if state == STATE.DEAD or state == STATE.EXITING:
 		return
 		
 	if weapon_1 and event.is_action_pressed("player_weapon_1"):
@@ -216,3 +221,8 @@ func _on_WeaponSwitchAnimation_weapon_ready(weapon:BaseWeapon):
 
 func _on_Player_state_dead():
 	active_weapon.visible = false
+
+
+func _on_Player_entered_exit():
+	state = STATE.EXITING
+	emit_signal("state_exiting")

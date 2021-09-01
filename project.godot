@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://EnemySpawner/EnemySpawner.gd"
 }, {
+"base": "Area2D",
+"class": "Exit",
+"language": "GDScript",
+"path": "res://Exit/Exit.gd"
+}, {
 "base": "Item",
 "class": "HealthPack",
 "language": "GDScript",
@@ -98,6 +103,7 @@ _global_script_class_icons={
 "BaseWeapon": "",
 "Enemy": "",
 "EnemySpawner": "",
+"Exit": "",
 "HealthPack": "",
 "HitBox": "",
 "HitEffect": "",
