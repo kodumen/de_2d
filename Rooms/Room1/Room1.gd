@@ -1,10 +1,13 @@
 extends Node2D
 
 
+const CURSOR = preload("res://Player/cursor_default.png")
+
 onready var door:Wall = $Door
 
 
 func _ready():
+	Input.set_custom_mouse_cursor(CURSOR, Input.CURSOR_ARROW, Vector2(30, 30))
 	EventBus.connect("enemy_state_dead", self, "_on_enemy_state_dead")
 	
 	

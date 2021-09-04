@@ -5,6 +5,7 @@ extends Node2D
 
 
 const FIRE = preload("res://EnemySpawner/Particles2D.tscn")
+const WAIT_TIME = 0.8
 
 
 export(PackedScene) var enemy_scene
@@ -30,7 +31,7 @@ func _on_enemy_state_dead():
 	add_child(fire)
 	fire.global_position = global_position
 	var timer = Timer.new()
-	timer.wait_time = 1.5
+	timer.wait_time = WAIT_TIME
 	timer.one_shot = true
 	timer.connect("timeout", self, "_on_timer_timeout")
 	add_child(timer)
