@@ -7,8 +7,9 @@ onready var door:Wall = $Door
 
 
 func _ready():
-	Input.set_custom_mouse_cursor(CURSOR, Input.CURSOR_ARROW, Vector2(30, 30))
+	set_mouse_cursor()
 	EventBus.connect("enemy_state_dead", self, "_on_enemy_state_dead")
+	EventBus.connect("game_resumed", self, "_on_game_resumed")
 	
 	
 func _on_enemy_state_dead(_enemy):
@@ -27,3 +28,11 @@ func living_enemies(group):
 			count += 1
 	
 	return count
+
+
+func set_mouse_cursor():
+	Input.set_custom_mouse_cursor(CURSOR, Input.CURSOR_ARROW, Vector2(30, 30))
+
+
+func _on_game_resumed():
+	set_mouse_cursor()

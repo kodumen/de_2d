@@ -4,6 +4,11 @@ extends CanvasLayer
 export(PackedScene) var room1
 
 
+func _ready():
+	# Ensure that the scene will run after returning from pause menu.
+	get_tree().paused = false
+
+
 func _on_QuitButton_button_up():
 	get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
 

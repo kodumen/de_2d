@@ -19,7 +19,7 @@ func _ready():
 	else:
 		player = DependencyInjector.player
 		
-	if player:
+	if player != null:
 		_update_hud()
 		# warning-ignore:return_value_discarded
 		player.connect("state_dead", self, "_on_Player_state_dead")

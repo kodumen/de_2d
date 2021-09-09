@@ -1,40 +1,31 @@
-extends Node2D
+extends Node
 
 
-var player:Node2D setget , get_player
-var nav_2d:Navigation2D setget , get_nav_2d
-var world:Node2D setget , get_world
+onready var player:Node2D = null setget , get_player
+onready var nav_2d:Navigation2D = null setget , get_nav_2d
+onready var world:Node2D = null setget , get_world
+
 
 
 func get_player() -> Node2D:
-	if player:
-		return player
+#	if player:
+#		return player
 	
-	var players = get_tree().get_nodes_in_group("Player")
-	if (len(players) > 0):
-		player = players[0]
-	
-	return player
+	return get_first_child_of_group("Player")
 
 
 func get_nav_2d() -> Navigation2D:
-	if nav_2d:
-		return nav_2d
+#	if nav_2d:
+#		return nav_2d
 		
-	var nav_2ds = get_tree().get_nodes_in_group("Navigation")
-	if (len(nav_2ds) > 0):
-		nav_2d = nav_2ds[0]
-		
-	return nav_2d
+	return get_first_child_of_group("Navigation")
 
 
 func get_world() -> Node2D:
-	if world:
-		return world
+#	if world:
+#		return world
 		
-	var worlds = get_tree().get_nodes_in_group("World")
-	if (len(worlds) > 0):
-		world = worlds[0]
+	world = get_first_child_of_group("World")
 
 	if ! world:
 		# In the absence of a world, create a new one
@@ -45,3 +36,11 @@ func get_world() -> Node2D:
 		world = stand_in_world
 
 	return world
+	
+	
+func get_first_child_of_group(group:String):
+	var children = get_tree().get_nodes_in_group(group)
+	if (len(children) > 0):
+		return children[0]
+		
+	return null
