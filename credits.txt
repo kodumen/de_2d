@@ -6,3 +6,7 @@ EFlexMusic
 awrmacd
 - Pump Action Shotgun
   https://freesound.org/people/awrmacd/sounds/387190/
+
+monte32
+- Footsteps_6_Dirt_shoe.wav
+  https://freesound.org/people/monte32/sounds/353799/
