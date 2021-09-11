@@ -59,7 +59,7 @@ func _ready():
 	if has_node(default_audio_stream_path):
 		audio_stream = get_node(default_audio_stream_path)
 		if !audio_stream:
-			print_debug("No audio stream found for %s!" % name)
+			print_debug("No default audio stream found for %s!" % name)
 	
 
 # Check whether the weapon is fired.

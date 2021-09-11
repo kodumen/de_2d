@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Pistol/pistol_fire-1.png" type="Texture" id=1]
 [ext_resource path="res://Pistol/pistol_fire-2.png" type="Texture" id=2]
 [ext_resource path="res://Pistol/Pistol.gd" type="Script" id=3]
 [ext_resource path="res://Shotgun/ShotgunTrail.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Pistol/pistol_fire.wav" type="AudioStream" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -38,5 +39,9 @@ collide_with_areas = true
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -6.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
