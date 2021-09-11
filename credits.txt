@@ -10,3 +10,8 @@ awrmacd
 monte32
 - Footsteps_6_Dirt_shoe.wav
   https://freesound.org/people/monte32/sounds/353799/
+
+GreenFireSound
+- Meat drop.wav
+  https://freesound.org/people/GreenFireSound/sounds/481090/
+  https://creativecommons.org/licenses/by/3.0/

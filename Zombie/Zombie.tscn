@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Zombie/zombie_default-1.png" type="Texture" id=1]
 [ext_resource path="res://Zombie/Zombie.gd" type="Script" id=2]
@@ -32,6 +32,9 @@
 [ext_resource path="res://Player/player_footstep_4.wav" type="AudioStream" id=30]
 [ext_resource path="res://Player/player_footstep_3.wav" type="AudioStream" id=31]
 [ext_resource path="res://Player/player_footstep_1.wav" type="AudioStream" id=32]
+[ext_resource path="res://Zombie/zombie_dead_3.wav" type="AudioStream" id=33]
+[ext_resource path="res://Zombie/zombie_dead_1.wav" type="AudioStream" id=34]
+[ext_resource path="res://Zombie/zombie_dead_2.wav" type="AudioStream" id=35]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 30.0
@@ -116,6 +119,7 @@ max_distance = 600.0
 script = ExtResource( 23 )
 idle_sfx = [ ExtResource( 22 ), ExtResource( 24 ), ExtResource( 26 ), ExtResource( 25 ) ]
 idle_tick = 0.5
+dead_sfx = [ ExtResource( 34 ), ExtResource( 35 ), ExtResource( 33 ) ]
 
 [node name="FootstepSfxPlayer" type="AudioStreamPlayer2D" parent="."]
 volume_db = -6.0

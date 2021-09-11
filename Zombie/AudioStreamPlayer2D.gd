@@ -4,6 +4,8 @@ extends AudioStreamPlayer2D
 export(Array, AudioStream) var idle_sfx = []
 export(float) var idle_tick = 0.1
 
+export(Array, AudioStream) var dead_sfx = []
+
 
 var timer:Timer
 var last_stream:AudioStream = null
@@ -20,6 +22,7 @@ func _on_Enemy_state_idle():
 	
 	
 func _on_Enemy_state_dead():
+	play_dead()
 	if timer:
 		timer.stop()
 	
@@ -45,6 +48,15 @@ func play_idle():
 
 	stream = new_stream
 	last_stream = stream
+	play()
+
+
+func play_dead():
+	if dead_sfx.empty():
+		print_debug("Dead SFX of %s is empty!" % get_parent().name)
+		return
+		
+	stream = dead_sfx[randi() % dead_sfx.size()]
 	play()
 
 
