@@ -9,6 +9,10 @@ func _enemy_ready():
 	animated_sprite = $AnimatedSprite
 	hit_box = $HitBox
 	
+	connect_node($VoiceSfxPlayer)
+	
+	$FootstepSfxPlayer.animated_sprite = animated_sprite
+	
 
 func _on_AttackZone_body_entered(body: Node2D):
 	if body == target:

@@ -80,17 +80,8 @@ func _ready():
 
 	# Connect animated_sprite listeners
 	if animated_sprite:
-		var listeners = {
-			"state_idle": "_on_Enemy_state_idle",
-			"state_moving": "_on_Enemy_state_moving",
-			"state_attack_melee": "_on_Enemy_state_attack_melee",
-			"state_attack_ranged": "_on_Enemy_state_attack_ranged",
-			"state_dead": "_on_Enemy_state_dead",
-		}
-		for enemy_signal in listeners:
-			if animated_sprite.has_method(listeners[enemy_signal]):
-				# warning-ignore:return_value_discarded
-				connect(enemy_signal, animated_sprite, listeners[enemy_signal])
+		connect_node(animated_sprite)
+
 	
 	# Configure hit_box
 	if ! use_custom_hit_box and hit_box:
@@ -218,4 +209,11 @@ func _on_TargetZone_body_entered(body):
 
 	set_target(body)
 	target_zone.queue_free()
-	
+
+
+func connect_node(node:Node):
+	# Connect all this node's signals to the target node.
+	for sig in get_signal_list():
+		var listener = "_on_Enemy_%s" % sig.name
+		if node.has_method(listener):
+			connect(sig.name, node, listener)
