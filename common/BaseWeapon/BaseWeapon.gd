@@ -30,6 +30,7 @@ onready var world:Node2D = DependencyInjector.world
 
 var is_idle = true
 var ray_casts:Array = []
+var audio_stream:AudioStreamPlayer
 
 # Can't typehint the class here because of cyclic dependency.
 # I also don't want to inherit from another base class so
@@ -53,6 +54,12 @@ func _ready():
 			
 	if next_weapon_path:
 		set_next_weapon(get_node(next_weapon_path))
+		
+	var default_audio_stream_path = "./AudioStreamPlayer"
+	if has_node(default_audio_stream_path):
+		audio_stream = get_node(default_audio_stream_path)
+		if !audio_stream:
+			print_debug("No audio stream found for %s!" % name)
 	
 
 # Check whether the weapon is fired.
@@ -66,6 +73,8 @@ func check_fire() -> bool:
 # Make sure to call the parent fire() method.
 func fire():
 	play("fire")
+	if audio_stream:
+		audio_stream.play()
 	is_idle = false
 
 
