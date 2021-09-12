@@ -63,6 +63,8 @@ func _ready():
 		
 	# warning-ignore:return_value_discarded
 	EventBus.connect("player_entered_exit", self, "_on_Player_entered_exit")
+	
+	$FootstepSfxPlayer.animated_sprite = animated_sprite
 
 
 func _process(_delta):

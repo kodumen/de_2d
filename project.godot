@@ -130,6 +130,7 @@ config/icon="res://icon.png"
 
 DependencyInjector="*res://common/DependencyInjector/DependencyInjector.tscn"
 EventBus="*res://common/EventBus/EventBus.gd"
+AudioPlayerUtil="*res://common/AudioPlayerUtil/AudioPlayerUtil.gd"
 
 [display]
 

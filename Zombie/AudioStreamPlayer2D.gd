@@ -8,7 +8,6 @@ export(Array, AudioStream) var dead_sfx = []
 
 
 var timer:Timer
-var last_stream:AudioStream = null
 
 
 func _ready():
@@ -39,32 +38,14 @@ func begin_timer():
 	
 	
 func play_idle():
-	var new_stream = last_stream
-	if idle_sfx.size() > 1:
-		while new_stream == last_stream:
-			new_stream = idle_sfx[randi() % idle_sfx.size()]
-	else:
-		new_stream = idle_sfx[0]
-
-	stream = new_stream
-	last_stream = stream
-	play()
+	AudioPlayerUtil.play_random(self, idle_sfx)
 
 
 func play_dead():
-	if dead_sfx.empty():
-		print_debug("Dead SFX of %s is empty!" % get_parent().name)
-		return
-		
-	stream = dead_sfx[randi() % dead_sfx.size()]
-	play()
+	AudioPlayerUtil.play_random(self, dead_sfx)
 
 
 func _on_timer_timeout():
-	if idle_sfx.empty():
-		print_debug("Idle SFX of %s is empty!" % get_parent().name)
-		return
-		
 	if playing or ! should_play():
 		return
 		

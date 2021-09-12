@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Player/player_default-2.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
@@ -19,6 +19,12 @@
 [ext_resource path="res://Player/WeaponSwitchAnimation.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Player/Camera2D.gd" type="Script" id=18]
 [ext_resource path="res://Pistol/Pistol.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Player/FootstepSfxPlayer.gd" type="Script" id=20]
+[ext_resource path="res://Player/player_footstep_1.wav" type="AudioStream" id=21]
+[ext_resource path="res://Player/player_footstep_5.wav" type="AudioStream" id=22]
+[ext_resource path="res://Player/player_footstep_2.wav" type="AudioStream" id=23]
+[ext_resource path="res://Player/player_footstep_3.wav" type="AudioStream" id=24]
+[ext_resource path="res://Player/player_footstep_4.wav" type="AudioStream" id=25]
 
 [sub_resource type="Animation" id=1]
 resource_name = "shake"
@@ -44,11 +50,6 @@ animations = [ {
 "name": "default",
 "speed": 4.0
 }, {
-"frames": [ ExtResource( 7 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "move",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 15 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 9 ) ],
 "loop": false,
 "name": "dead",
@@ -57,6 +58,11 @@ animations = [ {
 "frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "move_reversed",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "move",
 "speed": 10.0
 } ]
 
@@ -91,9 +97,6 @@ frames = SubResource( 2 )
 playing = true
 script = ExtResource( 8 )
 
-[node name="FootstepPlayer" type="AudioStreamPlayer" parent="AnimatedSprite"]
-volume_db = -12.0
-
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 34.3036 )
 shape = SubResource( 3 )
@@ -117,11 +120,15 @@ next_weapon_path = NodePath("../Shotgun")
 
 [node name="WeaponSwitchAnimation" parent="." instance=ExtResource( 17 )]
 
+[node name="FootstepSfxPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -12.0
+script = ExtResource( 20 )
+footstep_sfx = [ ExtResource( 21 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 22 ) ]
+
 [connection signal="hit" from="." to="Camera2D" method="_on_Player_hit"]
 [connection signal="state_dead" from="." to="." method="_on_Player_state_dead"]
 [connection signal="state_dead" from="." to="AnimatedSprite" method="_on_Player_state_dead"]
 [connection signal="state_exiting" from="." to="AnimatedSprite" method="_on_Player_state_exiting"]
 [connection signal="state_idle" from="." to="AnimatedSprite" method="_on_Player_state_idle"]
 [connection signal="state_motion" from="." to="AnimatedSprite" method="_on_Player_state_motion"]
-[connection signal="frame_changed" from="AnimatedSprite" to="AnimatedSprite" method="_on_AnimatedSprite_frame_changed"]
 [connection signal="weapon_ready" from="WeaponSwitchAnimation" to="." method="_on_WeaponSwitchAnimation_weapon_ready"]
