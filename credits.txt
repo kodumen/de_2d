@@ -15,3 +15,16 @@ GreenFireSound
 - Meat drop.wav
   https://freesound.org/people/GreenFireSound/sounds/481090/
   https://creativecommons.org/licenses/by/3.0/
+
+Merrick079
+- Punch2.wav
+  https://freesound.org/people/Merrick079/sounds/566435/
+
+qubodup
+- Whoosh
+  https://freesound.org/people/qubodup/sounds/60013/
+
+florianreichelt
+- Hitting in a Face
+  https://freesound.org/people/florianreichelt/sounds/460509/
+
