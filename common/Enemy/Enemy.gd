@@ -55,6 +55,7 @@ signal state_attack_melee(target, attack)
 signal state_attack_ranged(target, attack)
 signal state_dead
 signal hit(damage)
+signal target(target)
 
 
 func _ready():
@@ -139,6 +140,8 @@ func set_target(value:Node2D):
 	if target.has_signal("state_dead"):
 		# warning-ignore:return_value_discarded
 		target.connect("state_dead", self, "_on_target_state_dead")
+		
+	emit_signal("target", target)
 
 
 func set_state(value:int):

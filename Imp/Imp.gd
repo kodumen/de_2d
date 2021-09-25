@@ -13,6 +13,9 @@ func _enemy_ready():
 	ranged_attack_zone_collider = $RangedAttackZone/CollisionShape2D
 	melee_attack_zone_collider = $MeleeAttackZone/CollisionShape2D
 	sightline = $Sightline
+	
+	connect_node($GrowlSfxPlayer)
+	$ActionSfxPlayer.animated_sprite = animated_sprite
 
 
 func _process(_delta):
