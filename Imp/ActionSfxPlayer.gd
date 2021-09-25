@@ -2,6 +2,7 @@ extends AudioStreamPlayer2D
 
 
 export(Array, AudioStream) var foot_sfx = []
+export(Array, AudioStream) var melee_sfx = []
 
 
 var animated_sprite:AnimatedSprite setget set_animated_sprite
@@ -16,3 +17,7 @@ func _on_animated_sprite_frame_changed():
 	if animated_sprite.animation == "move" \
 	and [1, 3].has(animated_sprite.frame):
 		AudioPlayerUtil.play_random(self, foot_sfx)
+	
+	elif animated_sprite.animation == "attack_melee" \
+	and [2, 4].has(animated_sprite.frame):
+		AudioPlayerUtil.play_random(self, melee_sfx)
